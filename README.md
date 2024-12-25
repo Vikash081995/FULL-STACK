@@ -39,6 +39,14 @@ const State = () => {
 export default State;
  `
 
+### Lifecycle Methods
+
+In React, lifecycle methods are special methods in class components that allow you to run code at particular times during a component’s life cycle. The lifecycle consists of three phases:
+
+1.Mounting (when a component is added to the DOM)
+2.Updating (when a component is re-rendered)
+3.Unmounting (when a component is removed from the DOM)
+
 ### ERROR BOUNDARY
 
 An Error Boundary is a React component that catches JavaScript errors in its child component tree during rendering, lifecycle methods, and in constructors of child components. It allows developers to gracefully handle errors by displaying a fallback UI instead of crashing the entire application
@@ -105,4 +113,31 @@ const UsingErrorBoundary = () => {
   );
 }
 export default UsingErrorBoundary;
+```
+
+#### Handling Error in Functional component
+
+```import ErrorBoundary from "./1.creating-error-boundary";
+
+function ErrorFallback({ error, resetErrorBoundary }) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  );
+}
+
+function BUggyComponen() {
+  throw new Error("Crashed");
+}
+
+export default function UsingErrorBoundary() {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <BUggyComponen />
+    </ErrorBoundary>
+  );
+}
 ```
