@@ -47,6 +47,113 @@ In React, lifecycle methods are special methods in class components that allow y
 2.Updating (when a component is re-rendered)
 3.Unmounting (when a component is removed from the DOM)
 
+#### Mounting Phase
+
+-This phase is triggered when a component is created and inserted into the DOM.
+>Lifecycle Methods in Mounting:
+
+1.constructor()
+• Called before the component is mounted.
+• Used for initializing state and binding methods.
+• Avoid side effects (e.g., fetching data) here.
+
+```constructor(props) {
+  super(props);
+  this.state = { counter: 0 };
+}
+```
+
+2.static getDerivedStateFromProps(props, state)
+• Used to update the state based on props.
+• Runs before rendering.
+• Returns an object to update state or null to do nothing.
+
+```static getDerivedStateFromProps(props, state) {
+  if (props.initialValue !== state.counter) {
+    return { counter: props.initialValue };
+  }
+  return null;
+}
+```
+
+3.render()
+• The only required method in a class component.
+• Returns the JSX to render the component.
+
+```render() {
+  return <h1>Counter: {this.state.counter}</h1>;
+}
+```
+
+4.componentDidMount()
+• Invoked immediately after the component is mounted.
+• Best place for side effects like fetching data or setting up subscriptions.
+
+```componentDidMount() {
+  console.log('Component mounted');
+}
+```
+
+#### Updating Phase
+
+Triggered when the component’s state or props change, causing a re-render.
+
+> Lifecycle Methods in Updating:
+
+-static getDerivedStateFromProps(props, state)
+•Runs on both mount and update to sync state with props if needed.
+
+-shouldComponentUpdate(nextProps, nextState)
+• Used to control whether the component should re-render.
+• Returns true by default. Returning false skips render() and subsequent lifecycle methods.
+
+```shouldComponentUpdate(nextProps, nextState) {
+ return nextProps.counter !== this.props.counter;
+```
+
+-render()
+• Called to update the component’s UI.
+
+-getSnapshotBeforeUpdate(prevProps, prevState)
+
+• Captures information (like scroll position) before the DOM is updated.
+• Returns a value that is passed to componentDidUpdate.
+
+```getSnapshotBeforeUpdate(prevProps, prevState) {
+  if (prevState.counter !== this.state.counter) {
+    return `Counter changed from ${prevState.counter} to ${this.state.counter}`;
+  }
+  return null;
+}
+```
+
+-componentDidUpdate(prevProps, prevState, snapshot)
+
+• Invoked immediately after an update occurs.
+• Useful for performing side effects after a re-render.
+
+```componentDidUpdate(prevProps, prevState, snapshot) {
+  if (snapshot) {
+    console.log(snapshot);
+    }
+}
+```
+
+#### Unmounting Phase
+
+Triggered when the component is removed from the DOM.
+
+> Lifecycle Methods in Unmounting:
+
+1.componentWillUnmount()  
+ • Called just before the component is unmounted and destroyed.
+• Use it for cleanup (e.g., removing event listeners or canceling network requests).
+
+```componentWillUnmount() {
+    console.log('Component will unmount');
+}
+```
+
 ### ERROR BOUNDARY
 
 An Error Boundary is a React component that catches JavaScript errors in its child component tree during rendering, lifecycle methods, and in constructors of child components. It allows developers to gracefully handle errors by displaying a fallback UI instead of crashing the entire application
