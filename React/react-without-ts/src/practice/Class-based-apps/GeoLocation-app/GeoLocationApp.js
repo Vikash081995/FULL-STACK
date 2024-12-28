@@ -24,13 +24,22 @@ class GeoLocationApp extends Compnenent {
     console.log("Component did update");
   }
 
+  renderContent(){
+     if (this.state.errorMessage && !this.state.latitude) {
+       return <div>Error: {this.state.errorMessage}</div>;
+     }
+     if (!this.state.errorMessage && this.state.latitude) {
+       return <SeasonDisplay latitude={this.state.latitude} />;
+     }
+     return <div>Loading...</div>;
+  }
+
   render() {
-    if (this.state.errorMessage && !this.state.latitude) {
-      return <div>Error: {this.state.errorMessage}</div>;
-    }
-    if (!this.state.errorMessage && this.state.latitude) {
-      return <SeasonDisplay latitude={this.state.latitude} />;
-    }
-    return <div>Loading...</div>;
+   
+    return (
+      <div className="border red">
+        {this.renderContent()}
+      </div>
+    )
   }
 }
