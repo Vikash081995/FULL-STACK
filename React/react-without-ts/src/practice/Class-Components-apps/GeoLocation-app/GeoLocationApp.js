@@ -1,25 +1,26 @@
 import React, { Component } from "react";
 
 class GeoLocationApp extends Compnenent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      latitude: null,
-      longitude: null,
-      error: null,
-    };
+  state ={
+    latitude: null,
+    errorMessage: "",
+  }
+  componenDidMount() {
     window.navigator.geolocation.getCurrentPosition(
-      (position) => {
+      (position) =>
         this.setState({
           latitude: position.coords.latitude,
-        });
-      },
-      (error) => {
+        }),
+
+      (error) =>
         this.setState({
           error: error.message,
-        });
-      }
+        })
     );
+  }
+
+  componentDidUpdate() {
+    console.log("Component did update");
   }
 
   render() {

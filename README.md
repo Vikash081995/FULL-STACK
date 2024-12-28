@@ -50,7 +50,8 @@ In React, lifecycle methods are special methods in class components that allow y
 #### Mounting Phase
 
 -This phase is triggered when a component is created and inserted into the DOM.
->Lifecycle Methods in Mounting:
+
+> Lifecycle Methods in Mounting:
 
 1.constructor()
 • Called before the component is mounted.
@@ -146,7 +147,7 @@ Triggered when the component is removed from the DOM.
 > Lifecycle Methods in Unmounting:
 
 1.componentWillUnmount()  
- • Called just before the component is unmounted and destroyed.
+• Called just before the component is unmounted and destroyed.
 • Use it for cleanup (e.g., removing event listeners or canceling network requests).
 
 ```componentWillUnmount() {
