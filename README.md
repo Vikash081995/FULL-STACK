@@ -249,3 +249,92 @@ export default function UsingErrorBoundary() {
   );
 }
 ```
+
+### EventHandling
+
+React uses camelCase to handle events. Functions can be defined to handle events such as clicks, changes, etc., providing interactivity to the components.
+
+```const EventHandlingBasics=()=>{
+
+const handleClick=()=>{
+    console.log("Clicked");
+}
+
+    return (
+     <button onClick={handleClick}>Click Me </button>
+    )
+}
+```
+
+### Hooks
+
+React Hooks are functions that allow functional components to manage state and side effects. They were introduced in React 16.8 and provide a more concise way of working with state and lifecycle methods in functional components.
+}
+
+```import React,{useState} from 'react'
+
+export const UseStatDummy = () => {
+    const [count,setCount]= useState(0);
+  return (
+    <div>
+        <p>count: {count}</p>
+        <button onClick={()=>setCount(count+1)}>Increment</button>}
+    </div>
+  )
+}
+```
+
+### Controlled Components
+
+-Controlled components in React have inputs and their state controlled by React. They receive their current value and the onChange handler as props, making them controlled by React and not by the DOM
+
+```import React,{useState} from 'react'
+
+const Controlled = () => {
+    const [inutValue,setInputValue] = useState('');
+
+    const handleInputChange=(e)=>{
+        setInputValue(e.target.value);
+    }
+  return (
+   <input type="text" value={inputValue} onChange={hadleInputChange} placeholder='type text'/>
+  )
+}
+
+export default Controlled
+```
+
+### High Order Component
+
+-Higher Order Components (HOCs) are functions that take a component and return a new component with additional functionality. They are a way of reusing the component's logic.
+
+```import React from 'react'
+
+const WithLogger=(wrappedComponent)=>{
+    return class extends React.Component{
+        render(){
+            return(
+                <div>
+                    <WrappedComponent {...this.props}/>
+                </div>
+            )
+        }
+    }
+}
+
+export default WithLogger;
+```
+
+-using with logger Hoc
+
+```import React from "react";
+import WithLogger from "./HighOrderComponent";
+
+const UseCaseHOC = () => {
+  return <div>UseCaseHOC</div>;
+};
+
+const enhancedComponent = WithLogger(UseCaseHOC);
+export default enhancedComponent;
+
+```
