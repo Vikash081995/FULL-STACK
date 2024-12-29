@@ -338,3 +338,166 @@ const enhancedComponent = WithLogger(UseCaseHOC);
 export default enhancedComponent;
 
 ```
+
+### Rendering List
+
+-React provides the map function to render lists of items dynamically. Each item in the array is mapped to a React element, making it easier to render dynamic content.
+
+````import React from 'react'
+
+ const RenderingList = () => {
+     const items = ['Item1','Item2','Item3'];
+   return (
+     <ul>
+         {items.map((item,index) => (
+             <li key={index}>{item}</li>
+         ))}
+     </ul>
+   )
+ }
+
+ export default RenderingList```
+````
+
+### CONTEXT API
+
+-The Context API in React offers a way of transmitting data through the component tree without having to pass props manually at each level. It's useful for sharing values such as themes or authentication status.
+
+> creating context
+
+```import React, { createContext } from "react";
+
+const ThemeContext = createContext("light");
+
+export default ThemeContext;
+```
+
+> Using context
+
+```import { useContext } from "react";
+import ThemeContext from "./ThemeContext";
+
+const ThemeComponent = () => {
+  const theme = useContext(ThemeContext);
+  return (
+    <div style={{ backgroundColor: theme }}>
+      <h1>Theme Component</h1>
+      <p>Current Theme: {theme}</p>
+    </div>
+  );
+};
+export default ThemeComponent;
+```
+
+### KEYS IN REACT
+
+-Keys in React help identify which items have been changed, added or removed. They should be unique within the list and help React with efficient updates.
+
+```const KeysExample = () => {
+  const data = [
+    { id: 1, name: "Item 1" },
+    { id: 2, name: "Item 2" },
+    { id: 3, name: "Item 3" },
+  ];
+
+  return (
+    <ul>
+      {data.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
+  );
+};
+
+export default KeysExample;
+```
+
+### FORMS IN REACT
+
+-Handling forms in React involves managing form data using state and handling form submission via event handlers. Controlled components are used to synchronize form elements with React's state.
+
+```import { useState } from "react";
+const Forms = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <form>
+      <label>
+        {" "}
+        UserName:
+        <input
+          type="text"
+          placeholder="Enter your name"
+          value={formData.username}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Password:
+        <input
+          type="password"
+          placeholder="Enter your password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+
+export default Forms;
+```
+
+### RENDER PROPS
+
+-Render Props is a technique for sharing code between React components using a prop whose value is a function. This allows for the dynamic composition of components
+
+```import React, { useState } from "react";
+
+const MouseTracker = () => {
+  const [position, setPosition] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  const handleMouseMove = (event) => {
+    setPosition({
+      x: event.clientX,
+      y: event.clientY,
+    });
+  };
+  return (
+    <div onMouseMove={handleMouseMove}>
+      <h1>Mouse Tracker</h1>
+      {render(position)}
+    </div>
+  );
+};
+
+export default MouseTracker;
+```
+
+```import React from 'react';
+import MouseTracker from './MouseTracker';
+
+
+const RenderPropsExample =({render})=>{
+    return (
+        <MouseTracker render={(position)=>{
+            <p>
+                MouseTracker: {position.x} ,{position.y}
+            </p>
+        }}/>
+    )
+}
+
+export default RenderPropsExample;
+```
