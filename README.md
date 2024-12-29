@@ -501,3 +501,22 @@ const RenderPropsExample =({render})=>{
 
 export default RenderPropsExample;
 ```
+
+### CSS MODULES
+
+-CSS Modules help define the scope of styles for a specific component, avoiding global style conflicts. Each component can have its own CSS module with locally scoped styles.
+
+```.myComponent {
+  color: green;
+}
+```
+
+```import React from 'react';
+import styles from './CSSModulesExample.module.css';
+
+const CSSModulesExample = () => {
+  return <p className={styles.myComponent}>Styled with CSS Modules</p>;
+}
+
+export default CSSModulesExample;
+```
