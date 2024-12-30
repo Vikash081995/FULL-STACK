@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Component } from "react";
 
 class SearchBar extends Component {
@@ -11,7 +12,7 @@ class SearchBar extends Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.term);
+    this.props.onSubmit(this.state.term);
   };
   render() {
     return (
@@ -21,6 +22,7 @@ class SearchBar extends Component {
           <input
             type="text"
             value={this.state.term}
+            placeholder="Search"
             onChange={this.onInputChange}
           />
         </form>
