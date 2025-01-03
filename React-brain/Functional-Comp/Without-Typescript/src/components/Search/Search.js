@@ -5,6 +5,8 @@ const Search = ({ setSearchTerm, searchTerm }) => {
     setSearchTerm(e.target.value);
   };
 
+
+
   return (
     <div>
       <div className="ui form">
