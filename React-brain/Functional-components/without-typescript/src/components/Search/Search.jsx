@@ -1,17 +1,15 @@
 import { useState } from "react";
 
-const Search = ({ setSearchTerm, searchTerm }) => {
+const Search = ({ setSearchTerm, searchTerm ,label}) => {
   const onSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
-
-
 
   return (
     <div>
       <div className="ui form">
         <div className="field">
-          <label>Enter the search term</label>
+          <label>{label}</label>
           <input
             type="text"
             value={searchTerm}

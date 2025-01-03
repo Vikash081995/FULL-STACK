@@ -26,7 +26,11 @@ function App() {
           onSetSelected={setSelected}
         />
       )}
-      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Search
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        label="Enter Text Here"
+      />
       <Accordion items={items} />
     </>
   );
