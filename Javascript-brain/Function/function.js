@@ -40,7 +40,7 @@ const yearsUntilRetirement=(birthYear,firstName)=>{
 
 console.log(yearsUntilRetirement(1991,'Jonas')); //Jonas retires in 34 years
 //================================
-// Function callinmg other functions
+// Function calling other functions
 function cutFruitPieces(fruit){
     return fruit*4;
 }
