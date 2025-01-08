@@ -4,17 +4,24 @@ class Mobile {
     // static variable is shared by all the objects of the class
     static String name;
 
-    
-    public Mobile(){
-        brand="";
-        price=0;
-        name="";
+    // static block is executed only once when the class is loaded
+    static {
+        name = "Mobile";
+        System.out.println("Static block is executed");
     }
+
+    public Mobile() {
+        brand = "";
+        price = 0;
+        System.out.println("Constructor is executed");
+    }
+
     public void show() {
         System.out.println(brand + " " + price + " " + name);
     }
-    public static void show1() {
-        System.out.println("in show");
+
+    public static void show1(Mobile obj) {
+        System.out.println(obj.brand + " " + obj.price + " " + name);
     }
 }
 
@@ -30,6 +37,6 @@ public class StaticExample {
         m2.price = 50000;
         Mobile.name = "Samsung S22";
         m2.show();
-        Mobile.show1();
+        Mobile.show1(m1);
     }
 }
