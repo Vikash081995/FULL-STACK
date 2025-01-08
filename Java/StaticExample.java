@@ -4,8 +4,17 @@ class Mobile {
     // static variable is shared by all the objects of the class
     static String name;
 
+    
+    public Mobile(){
+        brand="";
+        price=0;
+        name="";
+    }
     public void show() {
         System.out.println(brand + " " + price + " " + name);
+    }
+    public static void show1() {
+        System.out.println("in show");
     }
 }
 
@@ -21,5 +30,6 @@ public class StaticExample {
         m2.price = 50000;
         Mobile.name = "Samsung S22";
         m2.show();
+        Mobile.show1();
     }
 }
