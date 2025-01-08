@@ -1,3 +1,4 @@
+import Link from "next/link";
 const url = "http://localhost:3000/api/tours";
 type Tour = {
   id: string;
@@ -20,7 +21,11 @@ async function ToursPage() {
     <section>
       <h1 className="text-3xl mb-4">Tours</h1>
       {data.map((tour: Tour) => {
-        return <h2 key={tour.id}>{tour.name}</h2>;
+        return (
+          <Link key={tour.id} href={`/tours/${tour.id}`}>
+            <h2 key={tour.id}>{tour.name}</h2>
+          </Link>
+        );
       })}
     </section>
   );
