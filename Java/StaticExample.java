@@ -1,0 +1,25 @@
+class Mobile {
+    String brand;
+    int price;
+    // static variable is shared by all the objects of the class
+    static String name;
+
+    public void show() {
+        System.out.println(brand + " " + price + " " + name);
+    }
+}
+
+public class StaticExample {
+    public static void main(String[] args) {
+        Mobile m1 = new Mobile();
+        m1.brand = "Apple";
+        m1.price = 100000;
+        Mobile.name = "Iphone 13";
+        m1.show();
+        Mobile m2 = new Mobile();
+        m2.brand = "Samsung";
+        m2.price = 50000;
+        Mobile.name = "Samsung S22";
+        m2.show();
+    }
+}
