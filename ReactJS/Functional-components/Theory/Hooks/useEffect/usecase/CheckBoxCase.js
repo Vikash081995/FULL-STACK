@@ -3,8 +3,6 @@ import React, { useState } from "react";
 function CheckBoxCase() {
   const [checked, setChecked] = useState(false);
 
-
-
   //can be used to log out the state of the checkbox
 
   useEffect(() => {
