@@ -12,7 +12,8 @@ JSX is a syntax extension for JavaScript that looks similar to XML or HTML. It a
 
 Props are a way of passing data from a parent component to a child component in React. They are immutable and provide a way of making components dynamic and reusable
 
-```import React from 'react';
+```jsx
+import React from "react";
 
 const PassingProps = (props: { message: string }) => {
   return <div>{props?.message}</div>;
@@ -25,7 +26,8 @@ export default PassingProps;
 
 State in React refers to the internal data that a component can hold and manage. It allows components to store and update data that can be used to render dynamic content.
 
-`import React, { useState } from 'react';
+```jsx
+import React, { useState } from "react";
 import { useState } from "react";
 const State = () => {
   const [count, setCount] = useState(0);
@@ -37,7 +39,7 @@ const State = () => {
   );
 };
 export default State;
- `
+```
 
 ### Lifecycle Methods
 
@@ -58,7 +60,8 @@ In React, lifecycle methods are special methods in class components that allow y
 • Used for initializing state and binding methods.
 • Avoid side effects (e.g., fetching data) here.
 
-```constructor(props) {
+```jsx
+constructor(props) {
   super(props);
   this.state = { counter: 0 };
 }
@@ -69,7 +72,8 @@ In React, lifecycle methods are special methods in class components that allow y
 • Runs before rendering.
 • Returns an object to update state or null to do nothing.
 
-```static getDerivedStateFromProps(props, state) {
+```jsx
+static getDerivedStateFromProps(props, state) {
   if (props.initialValue !== state.counter) {
     return { counter: props.initialValue };
   }
@@ -81,7 +85,8 @@ In React, lifecycle methods are special methods in class components that allow y
 • The only required method in a class component.
 • Returns the JSX to render the component.
 
-```render() {
+```jsx
+render() {
   return <h1>Counter: {this.state.counter}</h1>;
 }
 ```
@@ -108,7 +113,8 @@ Triggered when the component’s state or props change, causing a re-render.
 • Used to control whether the component should re-render.
 • Returns true by default. Returning false skips render() and subsequent lifecycle methods.
 
-```shouldComponentUpdate(nextProps, nextState) {
+```jsx
+shouldComponentUpdate(nextProps, nextState) {
  return nextProps.counter !== this.props.counter;
 ```
 
@@ -120,7 +126,8 @@ Triggered when the component’s state or props change, causing a re-render.
 • Captures information (like scroll position) before the DOM is updated.
 • Returns a value that is passed to componentDidUpdate.
 
-```getSnapshotBeforeUpdate(prevProps, prevState) {
+```jsx
+getSnapshotBeforeUpdate(prevProps, prevState) {
   if (prevState.counter !== this.state.counter) {
     return `Counter changed from ${prevState.counter} to ${this.state.counter}`;
   }
@@ -133,7 +140,8 @@ Triggered when the component’s state or props change, causing a re-render.
 • Invoked immediately after an update occurs.
 • Useful for performing side effects after a re-render.
 
-```componentDidUpdate(prevProps, prevState, snapshot) {
+```jsx
+componentDidUpdate(prevProps, prevState, snapshot) {
   if (snapshot) {
     console.log(snapshot);
     }
@@ -150,7 +158,8 @@ Triggered when the component is removed from the DOM.
 • Called just before the component is unmounted and destroyed.
 • Use it for cleanup (e.g., removing event listeners or canceling network requests).
 
-```componentWillUnmount() {
+```jsx
+componentWillUnmount() {
     console.log('Component will unmount');
 }
 ```
@@ -176,7 +185,8 @@ An Error Boundary is a React component that catches JavaScript errors in its chi
 
 - An Error Boundary must be a class component.
 
-```import { Component } from "react";
+```jsx
+import { Component } from "react";
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -210,7 +220,8 @@ export default ErrorBoundary;
 
 - Wrap any part of your application where you want to catch errors:
 
-```import ErrorBoundary from "./1-creating-error-boundary";
+```jsx
+import ErrorBoundary from "./1-creating-error-boundary";
 import Dummy from "./dummy-component";
 
 const UsingErrorBoundary = () => {
@@ -225,7 +236,8 @@ export default UsingErrorBoundary;
 
 #### Handling Error in Functional component
 
-```import ErrorBoundary from "./1.creating-error-boundary";
+```jsx
+import ErrorBoundary from "./1.creating-error-boundary";
 
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
@@ -250,11 +262,12 @@ export default function UsingErrorBoundary() {
 }
 ```
 
-### EventHandling
+### Event Handling
 
 React uses camelCase to handle events. Functions can be defined to handle events such as clicks, changes, etc., providing interactivity to the components.
 
-```const EventHandlingBasics=()=>{
+```jsx
+const EventHandlingBasics=()=>{
 
 const handleClick=()=>{
     console.log("Clicked");
@@ -271,7 +284,8 @@ const handleClick=()=>{
 React Hooks are functions that allow functional components to manage state and side effects. They were introduced in React 16.8 and provide a more concise way of working with state and lifecycle methods in functional components.
 }
 
-```import React,{useState} from 'react'
+```jsx
+import React,{useState} from 'react'
 
 export const UseStatDummy = () => {
     const [count,setCount]= useState(0);
@@ -288,7 +302,8 @@ export const UseStatDummy = () => {
 
 -Controlled components in React have inputs and their state controlled by React. They receive their current value and the onChange handler as props, making them controlled by React and not by the DOM
 
-```import React,{useState} from 'react'
+```jsx
+import React,{useState} from 'react'
 
 const Controlled = () => {
     const [inutValue,setInputValue] = useState('');
@@ -308,7 +323,8 @@ export default Controlled
 
 -Higher Order Components (HOCs) are functions that take a component and return a new component with additional functionality. They are a way of reusing the component's logic.
 
-```import React from 'react'
+```jsx
+import React from 'react'
 
 const WithLogger=(wrappedComponent)=>{
     return class extends React.Component{
@@ -327,7 +343,8 @@ export default WithLogger;
 
 -using with logger Hoc
 
-```import React from "react";
+```jsx
+import React from "react";
 import WithLogger from "./HighOrderComponent";
 
 const UseCaseHOC = () => {
@@ -343,7 +360,8 @@ export default enhancedComponent;
 
 -React provides the map function to render lists of items dynamically. Each item in the array is mapped to a React element, making it easier to render dynamic content.
 
-````import React from 'react'
+```jsx
+import React from 'react'
 
  const RenderingList = () => {
      const items = ['Item1','Item2','Item3'];
@@ -357,7 +375,7 @@ export default enhancedComponent;
  }
 
  export default RenderingList```
-````
+```
 
 ### CONTEXT API
 
@@ -374,7 +392,8 @@ export default ThemeContext;
 
 > Using context
 
-```import { useContext } from "react";
+```jsx
+import { useContext } from "react";
 import ThemeContext from "./ThemeContext";
 
 const ThemeComponent = () => {
@@ -393,7 +412,8 @@ export default ThemeComponent;
 
 -Keys in React help identify which items have been changed, added or removed. They should be unique within the list and help React with efficient updates.
 
-```const KeysExample = () => {
+```jsx
+const KeysExample = () => {
   const data = [
     { id: 1, name: "Item 1" },
     { id: 2, name: "Item 2" },
@@ -416,7 +436,8 @@ export default KeysExample;
 
 -Handling forms in React involves managing form data using state and handling form submission via event handlers. Controlled components are used to synchronize form elements with React's state.
 
-```import { useState } from "react";
+```jsx
+import { useState } from "react";
 const Forms = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -460,7 +481,8 @@ export default Forms;
 
 -Render Props is a technique for sharing code between React components using a prop whose value is a function. This allows for the dynamic composition of components
 
-```import React, { useState } from "react";
+```jsx
+import React, { useState } from "react";
 
 const MouseTracker = () => {
   const [position, setPosition] = useState({
@@ -485,7 +507,8 @@ const MouseTracker = () => {
 export default MouseTracker;
 ```
 
-```import React from 'react';
+```jsx
+import React from 'react';
 import MouseTracker from './MouseTracker';
 
 
@@ -511,7 +534,8 @@ export default RenderPropsExample;
 }
 ```
 
-```import React from 'react';
+```jsx
+import React from 'react';
 import styles from './CSSModulesExample.module.css';
 
 const CSSModulesExample = () => {
@@ -520,4 +544,3 @@ const CSSModulesExample = () => {
 
 export default CSSModulesExample;
 ```
-
