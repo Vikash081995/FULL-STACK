@@ -40,5 +40,4 @@ public class ParameterizedConstructor {
         // output: 12 reddy
         // 20 reddy
     }
-
 }
