@@ -1,3 +1,4 @@
+package CoreJava;
 class Vechile {
     String brand = "GEneric vechile";
 

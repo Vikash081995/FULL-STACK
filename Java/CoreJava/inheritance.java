@@ -1,3 +1,4 @@
+package CoreJava;
 class A {
 
     public A() {

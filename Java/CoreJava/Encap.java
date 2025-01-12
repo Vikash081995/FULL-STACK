@@ -1,3 +1,5 @@
+package CoreJava;
+
 class Human {
     private int age = 11;
     private String name = "Bj";
