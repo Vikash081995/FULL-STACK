@@ -1,32 +1,33 @@
 package CoreJava;
-class A {
 
-    public A() {
+class AInheritance {
+
+    public AInheritance() {
         super();
         System.out.println("A constructor");
     }
 
-    public A(int n) {
+    public AInheritance(int n) {
         super();
         System.out.println("in a : " + n);
     }
 
 }
 
-class B extends A {
+class BInheritance extends AInheritance {
 
-    public B() {
-        super(); 
+    public BInheritance() {
+        super();
         System.out.println("B constructor");
     }
 
-    public B(String s){
+    public BInheritance(String s) {
         this();
         System.out.println("in b " + s);
 
     }
 
-    public B(int n) {
+    public BInheritance(int n) {
         super(n);
         System.out.println("in b " + n);
     }
@@ -34,7 +35,7 @@ class B extends A {
 
 public class inheritance {
     public static void main(String[] args) {
-        B obj = new B("hello");
+        BInheritance obj = new BInheritance("hello");
 
     }
 }
