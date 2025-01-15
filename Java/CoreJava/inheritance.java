@@ -36,6 +36,7 @@ class BInheritance extends AInheritance {
 public class inheritance {
     public static void main(String[] args) {
         BInheritance obj = new BInheritance("hello");
+        System.out.println(obj);
 
     }
 }

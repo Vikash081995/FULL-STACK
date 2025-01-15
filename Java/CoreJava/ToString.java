@@ -24,7 +24,7 @@ public class ToString {
         obj.price = 20000;
         System.out.println(obj);
 
-        Laptop obj2= new Laptop()
+        Laptop obj2= new Laptop();
         obj2.model = "Lenovo";
         obj2.price = 20000;
         
