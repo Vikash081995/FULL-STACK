@@ -253,10 +253,10 @@ n99.reverse(); // -> reverse array order
 console.log(n99); // [5, 4, 3, 2, 1]
 //========================================
 //Sorting elements in array
-//sort: arrange array elements in ascending order. Sort takes a call back function, 
-const nm1=["banana","orange","mango","lemon"]
-nm1.sort()
-console.log(nm1) //['banana', 'lemon', 'mango', 'orange']
+//sort: arrange array elements in ascending order. Sort takes a call back function,
+const nm1 = ["banana", "orange", "mango", "lemon"];
+nm1.sort();
+console.log(nm1); //['banana', 'lemon', 'mango', 'orange']
 
 const tech = ["HTML", "CSS", "JS", "React", "Redux", "Node", "MongDB"];
 console.log(tech.sort()); // ['CSS', 'HTML', 'JS', 'MongDB', 'Node', 'React', 'Redux']
