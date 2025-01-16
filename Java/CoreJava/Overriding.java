@@ -1,6 +1,6 @@
 package CoreJava;
 
-class A {
+class A2 {
     public void show() {
         System.out.println("In A");
     }
@@ -14,7 +14,7 @@ class A {
     }
 }
 
-class B extends A {
+class B2 extends A2 {
     public void show() {
         System.out.println("In B");
     }
@@ -30,7 +30,7 @@ class B extends A {
 
 public class Overriding {
     public static void main(String[] args) {
-        A obj = new A();
+        A2 obj = new A2();
         obj.show();
         obj.config();
     }

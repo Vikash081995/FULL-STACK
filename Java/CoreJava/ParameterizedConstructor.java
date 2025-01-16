@@ -1,15 +1,15 @@
 package CoreJava;
 
-class Human {
+class Humantype {
     private int age;
     private String name;
 
-    public Human() { // default constructor
+    public Humantype() { // default constructor
         age = 12;
         name = "reddy";
     }
 
-    public Human(int age, String name) { // parameterized constructor
+    public Humantype(int age, String name) { // parameterized constructor
         this.age = age;
         this.name = name;
     }
@@ -34,8 +34,8 @@ class Human {
 public class ParameterizedConstructor {
 
     public static void main(String[] args) {
-        Human h1 = new Human();
-        Human h2 = new Human(20, "reddy");
+        Humantype h1 = new Humantype();
+        Humantype h2 = new Humantype(20, "reddy");
         System.out.println(h1.getAge() + " " + h1.getName());
         System.out.println(h2.getAge() + " " + h2.getName());
         // output: 12 reddy

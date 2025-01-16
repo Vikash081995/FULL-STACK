@@ -1,24 +1,23 @@
 package CoreJava;
-class A{
-    void show1(){
+
+class Ap {
+    void show1() {
         System.out.println("Class A");
     }
 }
 
-class B extends A{
-    public void show2(){
-            System.out.println("Class B");
+class Bp extends Ap {
+    public void show2() {
+        System.out.println("Class B");
     }
 }
 
-
-
 public class UpcastingDownCasting {
     public static void main(String[] args) {
-        A obj1 =(A) new B();
+        Ap obj1 = (Ap) new Bp();
         obj1.show1();
-        B obj2 = (B) obj1;
+        Bp obj2 = (Bp) obj1;
         obj2.show2();
-      
+
     }
 }
