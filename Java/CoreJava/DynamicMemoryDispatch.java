@@ -1,19 +1,19 @@
 package CoreJava;
 
-class A {
+class A1 {
     public void show() {
         System.out.println("in A");
     }
 }
 
-class B extends A {
+class B1 extends A1 {
     public void show() {
         System.out.println("in B");
     }
 
 }
 
-class C extends A {
+class C1 extends A1 {
     public void show() {
         System.out.println("in C");
     }
@@ -21,11 +21,11 @@ class C extends A {
 
 public class DynamicMemoryDispatch {
     public static void main(String[] args) {
-        A obj = new A();
+        A1 obj = new A1();
         obj.show();
-        obj = new B();
+        obj = new B1();
         obj.show();
-        obj = new C();
+        obj = new C1();
         obj.show();
 
     }
