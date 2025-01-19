@@ -1,7 +1,7 @@
-import React from "react";
+import React,{useState} from "react";
 
 const Crendering = () => {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] =useState(false);
   let content;
   if (isLoggedIn) {
     content = <h1>Welcome User</h1>;

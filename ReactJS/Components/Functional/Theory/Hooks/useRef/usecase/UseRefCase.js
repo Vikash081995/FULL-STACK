@@ -1,17 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const UseRefCase = () => {
   const [count, setCount] = useState(0);
   const ref = useRef(1);
 
-const incrementCount = () => {
+  useEffect(() => {
+    console.log("COMPONENT RENDERED");
+  });
+
+  const incrementCount = () => {
     setCount(count + 1);
   };
 
   const incrementRef = () => {
     ref.current = ref.current + 1;
   };
-
 
   return (
     <div>

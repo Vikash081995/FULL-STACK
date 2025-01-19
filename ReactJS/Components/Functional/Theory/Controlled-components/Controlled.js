@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Controlled = () => {
-  const [inutValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -10,7 +10,7 @@ const Controlled = () => {
     <input
       type="text"
       value={inputValue}
-      onChange={hadleInputChange}
+      onChange={handleInputChange}
       placeholder="type text"
     />
   );
