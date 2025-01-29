@@ -1,5 +1,17 @@
+import Hello from "./components/Hello";
+import Greet from "./components/Greet";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Hello />
+      <Greet name="Ravi" />
+      <Greet name="Human">this is children props</Greet>
+      <Greet name="new">
+        <button> Action</button>
+      </Greet>
+    </>
+  );
 }
 
 export default App;
