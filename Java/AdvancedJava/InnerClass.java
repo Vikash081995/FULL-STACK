@@ -1,6 +1,5 @@
 package AdvancedJava;
 
-
 class Ainner{
     int age;
 
