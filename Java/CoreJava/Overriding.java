@@ -1,4 +1,4 @@
-package CoreJava;
+
 
 class A2 {
     public void show() {

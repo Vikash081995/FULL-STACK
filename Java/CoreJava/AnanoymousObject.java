@@ -1,5 +1,3 @@
-package CoreJava;
-
 class Anonymous {
     public Anonymous() {
         System.out.println("A");

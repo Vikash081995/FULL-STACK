@@ -1,5 +1,3 @@
-package CoreJava;
-
 public class A {
    public int marks = 10;
    int rollno = 10;

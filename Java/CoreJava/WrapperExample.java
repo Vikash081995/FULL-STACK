@@ -1,11 +1,12 @@
-package CoreJava;
 public class WrapperExample {
     public static void main(String[] args) {
-        // Autoboxing: Automatic conversion of primitive types to their corresponding wrapper classes
+        // Autoboxing: Automatic conversion of primitive types to their corresponding
+        // wrapper classes
         Integer intObject = 10; // int to Integer
         Double doubleObject = 5.5; // double to Double
 
-        // Unboxing: Automatic conversion of wrapper classes to their corresponding primitive types
+        // Unboxing: Automatic conversion of wrapper classes to their corresponding
+        // primitive types
         int intPrimitive = intObject; // Integer to int
         double doublePrimitive = doubleObject; // Double to double
 

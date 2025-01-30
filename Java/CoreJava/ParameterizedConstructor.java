@@ -1,4 +1,4 @@
-package CoreJava;
+
 
 class Humantype {
     private int age;

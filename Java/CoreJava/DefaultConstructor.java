@@ -1,4 +1,3 @@
-package CoreJava;
 
 class Human {
     private int age;

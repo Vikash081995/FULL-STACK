@@ -1,4 +1,4 @@
-package CoreJava;
+
 class Vechile {
     String brand = "GEneric vechile";
 
@@ -31,11 +31,11 @@ class Car extends Vechile {
 }
 
 public class SuperExample {
-        public static void main(String[] args) {
-            Car obj = new Car("Honda", "City");
-            obj.displayInfo();
-            // output: Child brand is City
-            // Parent brand is Honda
-            // Vechile started
-        }
+    public static void main(String[] args) {
+        Car obj = new Car("Honda", "City");
+        obj.displayInfo();
+        // output: Child brand is City
+        // Parent brand is Honda
+        // Vechile started
+    }
 }

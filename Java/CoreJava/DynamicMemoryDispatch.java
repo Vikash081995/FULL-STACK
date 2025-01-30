@@ -1,4 +1,3 @@
-package CoreJava;
 
 class A1 {
     public void show() {

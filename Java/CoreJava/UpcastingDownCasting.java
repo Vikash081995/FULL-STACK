@@ -1,5 +1,3 @@
-package CoreJava;
-
 class Ap {
     void show1() {
         System.out.println("Class A");
