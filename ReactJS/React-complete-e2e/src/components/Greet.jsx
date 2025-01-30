@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-const Greet = (props) => {
+const Greet = ({ name, heroName, children }) => {
   return (
     <div>
-      {props.name}
-      {props.children}
+      <div>{name}</div>
+      <div>{heroName}</div>
+      <div>{children}</div>
     </div>
   );
 };

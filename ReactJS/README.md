@@ -6,7 +6,79 @@
 
 ### JSX
 
-JSX is a syntax extension for JavaScript that looks similar to XML or HTML. It allows developers to write HTML elements and components in a more concise and readable manner within JavaScript files.
+- JSX is a syntax extension for JavaScript that looks similar to XML or HTML. It allows developers to write HTML elements and components in a more concise and readable manner within JavaScript files.
+
+- JSX = JavaScript + XML: It combines JavaScript’s power with HTML’s declarative syntax.
+
+```jsx
+const element = <h1>Hello, JSX!</h1>;
+```
+
+becomes:
+
+```jsx
+const element = React.createElement("h1", null, "Hello, JSX!");
+```
+
+#### Core Concepts
+
+a. Embedding JavaScript in JSX
+-Use curly braces {} to embed JavaScript expressions:
+
+```jsx
+const name = "Alice";
+const element = <h1>Hello, {name}</h1>; // Output: <h1>Hello, Alice</h1>
+```
+
+b. JSX Attributes
+-Use camelCase for attributes (e.g., className instead of class, onClick instead of onclick).
+
+-Inline styles are passed as objects:
+
+```jsx
+const style = { color: "red", fontSize: "20px" };
+<div style={style}>Styled Text</div>;
+```
+
+c. JSX Children
+
+-JSX can nest elements, but must have a single root element:
+
+```jsx
+// Valid
+const element = (
+  <div>
+    <h1>Title</h1>
+    <p>Content</p>
+  </div>
+);
+
+// Invalid (no parent wrapper)
+const invalidElement = (
+  <h1>Title</h1>
+  <p>Content</p>
+);
+```
+
+d. Self-Closing Tags
+
+-Tags with no children must close with />:
+
+```jsx
+<img src="image.jpg" alt="Example" /> // ✅ Correct
+<br>                                 // ❌ Incorrect (needs self-closing)
+```
+
+e. Components in JSX
+
+-Custom components start with a capital letter (to differentiate from HTML tags):
+
+```jsx
+function MyComponent() {
+  return <div>Hello, World!</div>;
+}
+usage:<MyComponent />
+```
 
 ### Props in react
 
@@ -230,7 +302,7 @@ const UsingErrorBoundary = () => {
       <Dummy />
     </ErrorBoundary>
   );
-}
+};
 export default UsingErrorBoundary;
 ```
 
@@ -267,16 +339,13 @@ export default function UsingErrorBoundary() {
 React uses camelCase to handle events. Functions can be defined to handle events such as clicks, changes, etc., providing interactivity to the components.
 
 ```jsx
-const EventHandlingBasics=()=>{
-
-const handleClick=()=>{
+const EventHandlingBasics = () => {
+  const handleClick = () => {
     console.log("Clicked");
-}
+  };
 
-    return (
-     <button onClick={handleClick}>Click Me </button>
-    )
-}
+  return <button onClick={handleClick}>Click Me </button>;
+};
 ```
 
 ### Hooks
@@ -285,17 +354,17 @@ React Hooks are functions that allow functional components to manage state and s
 }
 
 ```jsx
-import React,{useState} from 'react'
+import React, { useState } from "react";
 
 export const UseStatDummy = () => {
-    const [count,setCount]= useState(0);
+  const [count, setCount] = useState(0);
   return (
     <div>
-        <p>count: {count}</p>
-        <button onClick={()=>setCount(count+1)}>Increment</button>}
+      <p>count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>}
     </div>
-  )
-}
+  );
+};
 ```
 
 ### Controlled Components
@@ -303,20 +372,25 @@ export const UseStatDummy = () => {
 -Controlled components in React have inputs and their state controlled by React. They receive their current value and the onChange handler as props, making them controlled by React and not by the DOM
 
 ```jsx
-import React,{useState} from 'react'
+import React, { useState } from "react";
 
 const Controlled = () => {
-    const [inutValue,setInputValue] = useState('');
+  const [inutValue, setInputValue] = useState("");
 
-    const handleInputChange=(e)=>{
-        setInputValue(e.target.value);
-    }
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
   return (
-   <input type="text" value={inputValue} onChange={hadleInputChange} placeholder='type text'/>
-  )
-}
+    <input
+      type="text"
+      value={inputValue}
+      onChange={hadleInputChange}
+      placeholder="type text"
+    />
+  );
+};
 
-export default Controlled
+export default Controlled;
 ```
 
 ### High Order Component
@@ -324,19 +398,19 @@ export default Controlled
 -Higher Order Components (HOCs) are functions that take a component and return a new component with additional functionality. They are a way of reusing the component's logic.
 
 ```jsx
-import React from 'react'
+import React from "react";
 
-const WithLogger=(wrappedComponent)=>{
-    return class extends React.Component{
-        render(){
-            return(
-                <div>
-                    <WrappedComponent {...this.props}/>
-                </div>
-            )
-        }
+const WithLogger = (wrappedComponent) => {
+  return class extends React.Component {
+    render() {
+      return (
+        <div>
+          <WrappedComponent {...this.props} />
+        </div>
+      );
     }
-}
+  };
+};
 
 export default WithLogger;
 ```
@@ -353,14 +427,13 @@ const UseCaseHOC = () => {
 
 const enhancedComponent = WithLogger(UseCaseHOC);
 export default enhancedComponent;
-
 ```
 
 ### Rendering List
 
 -React provides the map function to render lists of items dynamically. Each item in the array is mapped to a React element, making it easier to render dynamic content.
 
-```jsx
+````jsx
 import React from 'react'
 
  const RenderingList = () => {
@@ -375,7 +448,7 @@ import React from 'react'
  }
 
  export default RenderingList```
-```
+````
 
 ### CONTEXT API
 
@@ -508,19 +581,20 @@ export default MouseTracker;
 ```
 
 ```jsx
-import React from 'react';
-import MouseTracker from './MouseTracker';
+import React from "react";
+import MouseTracker from "./MouseTracker";
 
-
-const RenderPropsExample =({render})=>{
-    return (
-        <MouseTracker render={(position)=>{
-            <p>
-                MouseTracker: {position.x} ,{position.y}
-            </p>
-        }}/>
-    )
-}
+const RenderPropsExample = ({ render }) => {
+  return (
+    <MouseTracker
+      render={(position) => {
+        <p>
+          MouseTracker: {position.x} ,{position.y}
+        </p>;
+      }}
+    />
+  );
+};
 
 export default RenderPropsExample;
 ```
@@ -535,12 +609,12 @@ export default RenderPropsExample;
 ```
 
 ```jsx
-import React from 'react';
-import styles from './CSSModulesExample.module.css';
+import React from "react";
+import styles from "./CSSModulesExample.module.css";
 
 const CSSModulesExample = () => {
   return <p className={styles.myComponent}>Styled with CSS Modules</p>;
-}
+};
 
 export default CSSModulesExample;
 ```
