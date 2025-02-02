@@ -1,10 +1,12 @@
 // import Hello from "./components/Hello";
 // import Greet from "./components/Greet";
-import RefsDemo from "./components/RefsDemo";
-import ParentComp from "./components/ParentComp";
-import PortalDemo from "./components/PortalDemo";
-import Hero from "./components/Hero";
-import ErrorBoundary from "./components/ErrorBoundary";
+// import RefsDemo from "./components/RefsDemo";
+// import ParentComp from "./components/ParentComp";
+// import PortalDemo from "./components/PortalDemo";
+// import Hero from "./components/Hero";
+// import ErrorBoundary from "./components/ErrorBoundary";
+import { UserProvider } from "./components/userContext";
+import ComponentC from "./components/ComponentC";
 
 function App() {
   return (
@@ -15,7 +17,7 @@ function App() {
       {/* <Greet name="new" heroName="Superman">
         <button> Action</button>
       </Greet> */}
-      <ParentComp />
+      {/* <ParentComp />
       <RefsDemo />
       <PortalDemo />
       <div>
@@ -24,7 +26,10 @@ function App() {
           <Hero heroName="Superman" />
           <Hero heroName="Joker" />
         </ErrorBoundary>
-      </div>
+      </div> */}
+      <UserProvider name="Vish">
+        <ComponentC />
+      </UserProvider>
     </>
   );
 }
