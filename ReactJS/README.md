@@ -1,10 +1,6 @@
-# Job-switch-preparation-2025
+# React JS
 
----
-
-## React JS
-
-### JSX
+## JSX
 
 - JSX is a syntax extension for JavaScript that looks similar to XML or HTML. It allows developers to write HTML elements and components in a more concise and readable manner within JavaScript files.
 
@@ -20,29 +16,31 @@ becomes:
 const element = React.createElement("h1", null, "Hello, JSX!");
 ```
 
-#### Core Concepts
+### Core Concepts
 
-a. Embedding JavaScript in JSX
--Use curly braces {} to embed JavaScript expressions:
+#### Embedding JavaScript in JSX
+
+- Use curly braces {} to embed JavaScript expressions:
 
 ```jsx
 const name = "Alice";
 const element = <h1>Hello, {name}</h1>; // Output: <h1>Hello, Alice</h1>
 ```
 
-b. JSX Attributes
--Use camelCase for attributes (e.g., className instead of class, onClick instead of onclick).
+#### JSX Attributes
 
--Inline styles are passed as objects:
+- Use camelCase for attributes (e.g., className instead of class, onClick instead of onclick).
+
+- Inline styles are passed as objects:
 
 ```jsx
 const style = { color: "red", fontSize: "20px" };
 <div style={style}>Styled Text</div>;
 ```
 
-c. JSX Children
+#### JSX Children
 
--JSX can nest elements, but must have a single root element:
+- JSX can nest elements, but must have a single root element:
 
 ```jsx
 // Valid
@@ -60,29 +58,62 @@ const invalidElement = (
 );
 ```
 
-d. Self-Closing Tags
+#### Self-Closing Tags
 
--Tags with no children must close with />:
+- Tags with no children must close with />:
 
 ```jsx
 <img src="image.jpg" alt="Example" /> // ✅ Correct
 <br>                                 // ❌ Incorrect (needs self-closing)
 ```
 
-e. Components in JSX
+#### Components in JSX
 
--Custom components start with a capital letter (to differentiate from HTML tags):
+- Custom components start with a capital letter (to differentiate from HTML tags):
 
 ```jsx
 function MyComponent() {
   return <div>Hello, World!</div>;
 }
-usage:<MyComponent />
+usage: <MyComponent />;
 ```
 
-### Props in react
+#### JSX Under the Hood
 
-Props are a way of passing data from a parent component to a child component in React. They are immutable and provide a way of making components dynamic and reusable
+- JSX compiles to React.createElement() calls:
+
+```jsx
+const element = <h1>Hello, JSX!</h1>;
+// Compiles to:
+const element = React.createElement("h1", null, "Hello, JSX!");
+```
+
+#### BEST PRACTICES
+
+- Multi-line JSX: Wrap in parentheses () for readability:
+
+```jsx
+const element = (
+  <div>
+    <h1>Title</h1>
+    <p>Content</p>
+  </div>
+);
+```
+
+- Extract Complex Logic: Keep JSX clean by moving logic outside:
+
+```jsx
+const isLoggedIn = true;
+const greeting = isLoggedIn ? <Welcome /> : <Login />;
+return <div>{greeting}</div>;
+```
+
+## PROPS
+
+- Props are a way of passing data from a parent component to a child component in React. They are immutable and provide a way of making components dynamic and reusable
+
+- Props are short for properties, and they are used to pass data from a parent component to a child component. This mechanism enables components to be reusable and adaptable, as they can receive different sets of props to customize their behavior and appearance. Props are essentially JavaScript objects containing key-value pairs, where the keys represent the prop names and the values contain the corresponding data.
 
 ```jsx
 import React from "react";
@@ -94,7 +125,90 @@ const PassingProps = (props: { message: string }) => {
 export default PassingProps;
 ```
 
-### State in react
+### Passing Props to Components
+
+-Props are passed into a component in JSX as attributes, with prop names matching what is defined in the component.
+
+```jsx
+<ContactDetails name="Fred" email="fred@somewhere.com" />
+```
+
+-We can also pass multiple props to a component, and React allows passing arrays and objects as prop values.
+
+```jsx
+const productData = { title: "A book", price: 29.99, id: "p1" };
+<Product data={productData} />;
+```
+
+### Accessing Props
+
+-Props can be accessed using dot notation or destructuring, making the code cleaner and more readable.
+
+- For example, if we have a MyComponent component that receives a title and description prop, we can access them like this:
+
+```jsx
+const MyComponent = ({ title, description }) => {
+  return (
+    <div>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </div>
+  );
+};
+```
+
+> Class components can access props using this.props.propName.
+
+```jsx
+class User extends React.Component {
+  render() {
+    return <h1>{this.props.name}</h1>;
+  }
+}
+```
+
+#### Default Props
+
+- Default props can be defined using the defaultProps property.
+- Provide fallback values if a prop isn’t passed:
+
+```jsx
+// Functional Component
+function User({ name = "Guest" }) {
+  return <h1>Hello, {name}</h1>;
+}
+
+// Class Component (using static defaultProps)
+class User extends React.Component {
+  static defaultProps = { name: "Guest" };
+  render() {
+    return <h1>{this.props.name}</h1>;
+  }
+}
+```
+
+#### Children Prop
+
+- Children prop allows passing content between opening and closing tags of a component
+- Access nested content via props.children:
+
+```jsx
+// Parent
+function Card() {
+  return (
+    <div className="card">
+      <CardBody>This is the card content</CardBody>
+    </div>
+  );
+}
+
+// Child (CardBody)
+function CardBody({ children }) {
+  return <div className="card-body">{children}</div>;
+}
+```
+
+## STATE
 
 State in React refers to the internal data that a component can hold and manage. It allows components to store and update data that can be used to render dynamic content.
 
@@ -113,7 +227,7 @@ const State = () => {
 export default State;
 ```
 
-### Lifecycle Methods
+## LIFECYCLE METHODS
 
 In React, lifecycle methods are special methods in class components that allow you to run code at particular times during a component’s life cycle. The lifecycle consists of three phases:
 
@@ -121,7 +235,7 @@ In React, lifecycle methods are special methods in class components that allow y
 2.Updating (when a component is re-rendered)
 3.Unmounting (when a component is removed from the DOM)
 
-#### Mounting Phase
+### Mounting Phase
 
 -This phase is triggered when a component is created and inserted into the DOM.
 
@@ -172,7 +286,7 @@ render() {
 }
 ```
 
-#### Updating Phase
+### Updating Phase
 
 Triggered when the component’s state or props change, causing a re-render.
 
@@ -220,7 +334,7 @@ componentDidUpdate(prevProps, prevState, snapshot) {
 }
 ```
 
-#### Unmounting Phase
+### Unmounting Phase
 
 Triggered when the component is removed from the DOM.
 
@@ -236,24 +350,24 @@ componentWillUnmount() {
 }
 ```
 
-### ERROR BOUNDARY
+## ERROR BOUNDARY
 
 An Error Boundary is a React component that catches JavaScript errors in its child component tree during rendering, lifecycle methods, and in constructors of child components. It allows developers to gracefully handle errors by displaying a fallback UI instead of crashing the entire application
 
-#### When Do Error Boundaries Catch Errors?
+### When Do Error Boundaries Catch Errors?
 
 - In lifecycle methods
 - In constructors of child components
 - During rendering
 
-#### What Error Boundaries Cannot Catch?
+### What Error Boundaries Cannot Catch?
 
 - Errors inside an event handler
 - Errors in asynchronous code (e.g., setTimeout or fetch)
 - Errors from the server
 - Errors in the Error Boundary itself
 
-#### Creating an Error boundary
+### Creating an Error boundary
 
 - An Error Boundary must be a class component.
 
@@ -288,7 +402,7 @@ class ErrorBoundary extends Component {
 export default ErrorBoundary;
 ```
 
-#### Using error boundary
+### Using error boundary
 
 - Wrap any part of your application where you want to catch errors:
 
@@ -306,7 +420,7 @@ const UsingErrorBoundary = () => {
 export default UsingErrorBoundary;
 ```
 
-#### Handling Error in Functional component
+### Handling Error in Functional component
 
 ```jsx
 import ErrorBoundary from "./1.creating-error-boundary";
@@ -334,7 +448,7 @@ export default function UsingErrorBoundary() {
 }
 ```
 
-### Event Handling
+## EVENT HANDLING
 
 React uses camelCase to handle events. Functions can be defined to handle events such as clicks, changes, etc., providing interactivity to the components.
 
@@ -348,23 +462,24 @@ const EventHandlingBasics = () => {
 };
 ```
 
-### Hooks
+-React listens for all events at the top level using a single event listener, which reduces the memory footprint and initial setup time for event handlers. This approach, known as event delegation, simplifies event handling by centralizing the event logic at the root of the component tree. When an event occurs in a child component, React captures the event at the root of the component tree and then traverses down to the specific component that triggered the event.
 
-React Hooks are functions that allow functional components to manage state and side effects. They were introduced in React 16.8 and provide a more concise way of working with state and lifecycle methods in functional components.
-}
+### Event Propagation
+
+Event propagation in React is based on the component hierarchy rather than the DOM hierarchy. This means that when an event occurs in a child component, React will traverse down to the specific component that triggered the event, rather than bubbling up through the DOM tree. This approach allows for more efficient event handling and reduces the number of event listeners attached to individual DOM elements.
+
+#### BEST PRACTICE
+
+-When handling events in React, it's essential to follow best practices, such as using the preventDefault() method to prevent the browser's default behavior, and using the onSubmit prop to handle form submissions.
+
+> Passing Arguments to Event Handlers
 
 ```jsx
-import React, { useState } from "react";
+function handleClick(item) {
+  console.log("Clicked:", item);
+}
 
-export const UseStatDummy = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <p>count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>}
-    </div>
-  );
-};
+<button onClick={() => handleClick(specificItem)}>Click me</button>;
 ```
 
 ### Controlled Components
@@ -393,7 +508,7 @@ const Controlled = () => {
 export default Controlled;
 ```
 
-### High Order Component
+## HIGH ORDER COMPONENT
 
 -Higher Order Components (HOCs) are functions that take a component and return a new component with additional functionality. They are a way of reusing the component's logic.
 
@@ -429,7 +544,7 @@ const enhancedComponent = WithLogger(UseCaseHOC);
 export default enhancedComponent;
 ```
 
-### Rendering List
+## RENDERING LISTS
 
 -React provides the map function to render lists of items dynamically. Each item in the array is mapped to a React element, making it easier to render dynamic content.
 
@@ -450,7 +565,7 @@ import React from 'react'
  export default RenderingList```
 ````
 
-### CONTEXT API
+## CONTEXT API
 
 -The Context API in React offers a way of transmitting data through the component tree without having to pass props manually at each level. It's useful for sharing values such as themes or authentication status.
 
@@ -481,7 +596,7 @@ const ThemeComponent = () => {
 export default ThemeComponent;
 ```
 
-### KEYS IN REACT
+## KEYS IN REACT
 
 -Keys in React help identify which items have been changed, added or removed. They should be unique within the list and help React with efficient updates.
 
@@ -505,7 +620,7 @@ const KeysExample = () => {
 export default KeysExample;
 ```
 
-### FORMS IN REACT
+## FORMS IN REACT
 
 -Handling forms in React involves managing form data using state and handling form submission via event handlers. Controlled components are used to synchronize form elements with React's state.
 
@@ -550,7 +665,7 @@ const Forms = () => {
 export default Forms;
 ```
 
-### RENDER PROPS
+## RENDER PROPS
 
 -Render Props is a technique for sharing code between React components using a prop whose value is a function. This allows for the dynamic composition of components
 
@@ -599,7 +714,7 @@ const RenderPropsExample = ({ render }) => {
 export default RenderPropsExample;
 ```
 
-### CSS MODULES
+## CSS MODULES
 
 -CSS Modules help define the scope of styles for a specific component, avoiding global style conflicts. Each component can have its own CSS module with locally scoped styles.
 
@@ -617,4 +732,23 @@ const CSSModulesExample = () => {
 };
 
 export default CSSModulesExample;
+```
+
+## HOOKS
+
+React Hooks are functions that allow functional components to manage state and side effects. They were introduced in React 16.8 and provide a more concise way of working with state and lifecycle methods in functional components.
+}
+
+```jsx
+import React, { useState } from "react";
+
+export const UseStatDummy = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>}
+    </div>
+  );
+};
 ```
