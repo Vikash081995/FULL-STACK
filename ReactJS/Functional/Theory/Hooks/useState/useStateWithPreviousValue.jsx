@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function useStateWithPreviousValue() {
+function UseStateWithPreviousValue() {
   const [count, setCount] = useState(0);
 
   const incremenentBy5 = () => {
@@ -19,3 +19,5 @@ function useStateWithPreviousValue() {
     </div>
   );
 }
+
+export default UseStateWithPreviousValue;
