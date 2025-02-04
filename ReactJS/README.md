@@ -1319,55 +1319,6 @@ const Forms = () => {
 export default Forms;
 ```
 
-## RENDER PROPS
-
--Render Props is a technique for sharing code between React components using a prop whose value is a function. This allows for the dynamic composition of components
-
-```jsx
-import React, { useState } from "react";
-
-const MouseTracker = () => {
-  const [position, setPosition] = useState({
-    x: 0,
-    y: 0,
-  });
-
-  const handleMouseMove = (event) => {
-    setPosition({
-      x: event.clientX,
-      y: event.clientY,
-    });
-  };
-  return (
-    <div onMouseMove={handleMouseMove}>
-      <h1>Mouse Tracker</h1>
-      {render(position)}
-    </div>
-  );
-};
-
-export default MouseTracker;
-```
-
-```jsx
-import React from "react";
-import MouseTracker from "./MouseTracker";
-
-const RenderPropsExample = ({ render }) => {
-  return (
-    <MouseTracker
-      render={(position) => {
-        <p>
-          MouseTracker: {position.x} ,{position.y}
-        </p>;
-      }}
-    />
-  );
-};
-
-export default RenderPropsExample;
-```
-
 ## CSS MODULES
 
 -CSS Modules help define the scope of styles for a specific component, avoiding global style conflicts. Each component can have its own CSS module with locally scoped styles.
@@ -1844,7 +1795,7 @@ const DynamicPortal = ({ children }) => {
 
 ## RENDER PROPS
 
-- Render props are properties that are rendered, and they can be used to share code between components. This pattern is useful for making components reusable, as it allows us to pass different data to the render prop each time. 
+- Render props are properties that are rendered, and they can be used to share code between components. This pattern is useful for making components reusable, as it allows us to pass different data to the render prop each time.
 
 - Render Props is a pattern in React where a function is passed as a prop to a component, allowing for dynamic rendering.
 
@@ -1852,6 +1803,21 @@ const DynamicPortal = ({ children }) => {
 ✅ Promotes code reusability and separation of concerns.
 ✅ Helps in sharing logic between components without using Higher-Order Components (HOC).
 ✅ Useful for scenarios like data fetching, authentication, and animations.
+
+For example, a render prop can be used to pass a component as a prop to another component, like this:
+
+```jsx
+import React from "react";
+
+const List = ({ data, renderEmpty }) => {
+  if (!data.length) return renderEmpty;
+  return <p>{data.length} items</p>;
+};
+
+const App = () => {
+  return <List renderEmpty={<p>This list is empty</p>} />;
+};
+```
 
 useCase :
 
@@ -1879,7 +1845,15 @@ function UsersList() {
     <FetchData
       url="https://jsonplaceholder.typicode.com/users"
       render={({ data, loading }) =>
-        loading ? <p>Loading...</p> : <ul>{data.map((user) => <li key={user.id}>{user.name}</li>)}</ul>
+        loading ? (
+          <p>Loading...</p>
+        ) : (
+          <ul>
+            {data.map((user) => (
+              <li key={user.id}>{user.name}</li>
+            ))}
+          </ul>
+        )
       }
     />
   );
@@ -1888,3 +1862,59 @@ function UsersList() {
 export default UsersList;
 ```
 
+### Using Render Props
+
+A render prop is a prop on a component whose value is a function that returns a JSX element. This function can be used to render a component with specific props, like this
+
+```jsx
+import React from "react";
+
+const Title = (props) => props.render();
+
+const App = () => {
+  return (
+    <div>
+      <Title
+        render={() => (
+          <h1>
+            <span role="img" aria-label="emoji">
+              ✨
+            </span>
+            I am a render prop! <span role="img" aria-label="emoji">
+              ✨
+            </span>
+          </h1>
+        )}
+      />
+    </div>
+  );
+};
+```
+
+### Passing Data to Components
+
+Render props can be used to pass data from a parent component to a child component. For example, a parent component can pass a function as a prop to a child component, like this:
+
+```jsx
+import React from "react";
+
+const Parent = () => {
+  const data = { name: "John", age: 30 };
+
+  return (
+    <div>
+      <Child
+        render={(data) => (
+          <p>
+            {data.name} is {data.age} years old
+          </p>
+        )}
+      />
+    </div>
+  );
+};
+
+const Child = (props) => {
+  return props.render({ name: "Jane", age: 25 });
+};
+```
