@@ -704,7 +704,7 @@ const EventHandlingBasics = () => {
 
 Event propagation in React is based on the component hierarchy rather than the DOM hierarchy. This means that when an event occurs in a child component, React will traverse down to the specific component that triggered the event, rather than bubbling up through the DOM tree. This approach allows for more efficient event handling and reduces the number of event listeners attached to individual DOM elements.
 
-#### BEST PRACTICE
+#### best practices
 
 -When handling events in React, it's essential to follow best practices, such as using the preventDefault() method to prevent the browser's default behavior, and using the onSubmit prop to handle form submissions.
 
@@ -743,6 +743,299 @@ const Controlled = () => {
 
 export default Controlled;
 ```
+
+### Common Event Types & Use Cases
+
+a. Click Events (onClick):
+Use case: Buttons, custom components, closing modals.
+
+```jsx
+const DeleteButton = () => {
+  const handleDelete = () => {
+    // API call or state update
+  };
+  return <button onClick={handleDelete}>Delete Item</button>;
+};
+```
+
+b. Form Events (onChange, onSubmit):
+Use case: Controlled form inputs.
+
+```jsx
+const LoginForm = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Submit logic
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <button type="submit">Login</button>
+    </form>
+  );
+};
+```
+
+c. Keyboard Events (onKeyDown, onKeyUp):
+Use case: Shortcuts (e.g., Enter to submit).
+
+```jsx
+const SearchInput = () => {
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      // Trigger search
+    }
+  };
+  return <input onKeyDown={handleKeyPress} />;
+};
+```
+
+d. Mouse Events (onMouseEnter, onMouseLeave):
+Use case: Hover effects, tooltips.
+
+```jsx
+const Tooltip = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => setIsVisible(true)}
+      onMouseLeave={() => setIsVisible(false)}
+    >
+      Hover me
+      {isVisible && <div className="tooltip">More info...</div>}
+    </div>
+  );
+};
+```
+
+#### 3. Advanced Patterns & Best Practices
+
+a. Event Delegation:
+Attach a single event listener to a parent instead of multiple children (useful for lists).
+
+```jsx
+const List = () => {
+  const handleClick = (e) => {
+    if (e.target.tagName === "LI") {
+      console.log("Item clicked:", e.target.dataset.id);
+    }
+  };
+
+  return (
+    <ul onClick={handleClick}>
+      {items.map((item) => (
+        <li key={item.id} data-id={item.id}>
+          {item.name}
+        </li>
+      ))}
+    </ul>
+  );
+};
+```
+
+b. Custom Hooks for Reusable Logic:
+
+```jsx
+const useKeyPress = (targetKey, callback) => {
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === targetKey) callback();
+    };
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [targetKey, callback]);
+};
+
+// Usage
+const App = () => {
+  useKeyPress("Escape", () => console.log("Escape pressed!"));
+  return <div>Press Escape</div>;
+};
+```
+
+c. Higher-Order Components (HOCs) for Cross-Cutting Concerns:
+
+- Log events across multiple components.
+
+```jsx
+const withAnalytics = (WrappedComponent, eventName) => {
+  return (props) => {
+    const handleEvent = (e) => {
+      console.log(`Event ${eventName} triggered`, e);
+      if (props.onEvent) props.onEvent(e);
+    };
+    return <WrappedComponent {...props} onEvent={handleEvent} />;
+  };
+};
+
+// Usage
+const AnalyticsButton = withAnalytics(Button, "button_click");
+```
+
+#### 4. Performance Optimization
+
+a. Avoid Inline Arrow Functions in Render:
+
+- Inline functions create new references on every render, breaking memoization.
+
+```jsx
+// ❌ Bad: New function on every render
+<button onClick={() => handleClick(id)}>Click</button>;
+
+// ✅ Good: Use memoized callback
+const handleClick = useCallback(
+  (id) => {
+    /* ... */
+  },
+  [dependencies]
+);
+<button onClick={() => handleClick(id)}>Click</button>;
+```
+
+b. Use Passive Event Listeners:
+
+- Improve scroll performance for touch/wheel events.
+
+```jsx
+useEffect(() => {
+  const opts = { passive: true };
+  window.addEventListener("touchmove", handleTouch, opts);
+  return () => window.removeEventListener("touchmove", handleTouch, opts);
+}, []);
+```
+
+c. Event Listener Cleanup:
+
+- Always remove event listeners in useEffect cleanup to prevent memory leaks.
+
+```jsx
+useEffect(() => {
+  const handleResize = () => {
+    /* ... */
+  };
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+```
+
+### 5.Real-World Use Cases
+
+a. Drag-and-Drop:
+
+Use onDragStart, onDragEnd, and onDrop events.
+
+```jsx
+const DraggableItem = () => {
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData("text/plain", itemId);
+  };
+
+  return (
+    <div draggable onDragStart={handleDragStart}>
+      Drag me
+    </div>
+  );
+};
+```
+
+b. Infinite Scroll:
+
+- Attach a scroll event listener to load more data.
+
+```jsx
+const InfiniteList = () => {
+  const handleScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      // Load more data
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+};
+```
+
+c. Complex Forms with Dynamic Fields:
+
+Manage dynamic form state with nested event handlers.
+
+```jsx
+const DynamicForm = () => {
+  const [fields, setFields] = useState([{ value: "" }]);
+
+  const handleChange = (index, value) => {
+    const newFields = [...fields];
+    newFields[index].value = value;
+    setFields(newFields);
+  };
+
+  return (
+    <form>
+      {fields.map((field, i) => (
+        <input
+          key={i}
+          value={field.value}
+          onChange={(e) => handleChange(i, e.target.value)}
+        />
+      ))}
+    </form>
+  );
+};
+```
+
+### 7.Common Pitfalls & Fixes
+
+Pitfall 1: Stale Closures in Async Handlers:
+
+```jsx
+const handleClick = () => {
+  setTimeout(() => {
+    console.log(count); // ❌ Stale `count` value
+  }, 1000);
+};
+
+// ✅ Fix: Use refs or state updater functions
+const countRef = useRef(count);
+countRef.current = count;
+
+const handleClick = () => {
+  setTimeout(() => {
+    console.log(countRef.current); // Latest value
+  }, 1000);
+};
+```
+
+Pitfall 2: Unnecessary Re-Renders:
+
+Cause: Passing new function references to child components.
+
+Fix: Memoize handlers with useCallback.
+
+Pitfall 3: Forgetting Event Propagation:
+
+```jsx
+const Parent = () => (
+  <div onClick={handleParentClick}>
+    <Child onClick={handleChildClick} /> 
+  </div>
+);
+
+// Child click handler:
+const handleChildClick = (e) => {
+  e.stopPropagation(); // Prevent parent from triggering
+};
+```
+
 
 ## HIGH ORDER COMPONENT
 
