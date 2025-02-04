@@ -471,7 +471,11 @@ In React, lifecycle methods are special methods in class components that allow y
 2.Updating (when a component is re-rendered)
 3.Unmounting (when a component is removed from the DOM)
 
+-While class components use explicit lifecycle methods, functional components replicate this behavior with hooks like useEffect
+
 ### Mounting Phase
+
+- The mounting phase is the first stage of a component's life, during which the component is inserted into the DOM. The constructor is the first method called during this phase, and it is used to initialize the component's state and bind methods. The componentDidMount method is called after the component has been rendered, and it is used to perform any necessary initialization tasks.
 
 -This phase is triggered when a component is created and inserted into the DOM.
 
@@ -522,9 +526,29 @@ render() {
 }
 ```
 
+```jsx
+import React, { Component } from "react";
+
+class Example extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  componentDidMount() {
+    console.log("Component mounted");
+  }
+
+  render() {
+    return <div>Example</div>;
+  }
+}
+export default Example;
+```
+
 ### Updating Phase
 
-Triggered when the component’s state or props change, causing a re-render.
+The updating phase is the second stage of a component's life, during which the component's props or state change. The componentWillReceiveProps method is called when the component's props change, and it is used to update the component's state. The shouldComponentUpdate method is called to determine whether the component should be re-rendered. The componentDidUpdate method is called after the component has been updated, and it is used to perform any necessary task
 
 > Lifecycle Methods in Updating:
 
@@ -572,7 +596,7 @@ componentDidUpdate(prevProps, prevState, snapshot) {
 
 ### Unmounting Phase
 
-Triggered when the component is removed from the DOM.
+The unmounting phase is the final stage of a component's life, during which the component is removed from the DOM. The componentWillUnmount method is called during this phase, and it is used to perform any necessary cleanup tasks.
 
 > Lifecycle Methods in Unmounting:
 
@@ -585,6 +609,109 @@ componentWillUnmount() {
     console.log('Component will unmount');
 }
 ```
+
+```jsx
+import React, { Component } from "react";
+
+class Example extends Component {
+  componentWillUnmount() {
+    console.log("Component unmounted");
+  }
+
+  render() {
+    return <div>Example</div>;
+  }
+}
+```
+
+## LIFE CYCLE METHODS IN FUNCTIONAL COMPONENTS
+
+- Functional components use useEffect to replicate lifecycle behavior.
+
+- Lifecycle Phase useEffect Equivalent
+
+componentDidMount =====> useEffect(() => { ... }, [])
+componentDidUpdate ====> useEffect(() => { ... }, [dependencies])
+componentWillUnmount Return a cleanup function: useEffect(() => { return () => { ... } }, [])
+
+```jsx
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  // componentDidMount + componentDidUpdate
+  useEffect(() => {
+    fetchUser(userId).then(setUser);
+  }, [userId]); // Re-run if userId changes
+
+  // componentWillUnmount
+  useEffect(() => {
+    const timer = setInterval(() => console.log("Tick"), 1000);
+    return () => clearInterval(timer); // Cleanup
+  }, []);
+
+  return user ? <Profile data={user} /> : <Loader />;
+}
+```
+
+## PURE COMPONENTS
+
+- Pure Components are a performance optimization in React that prevent unnecessary re-renders by performing a shallow comparison of props and state.
+
+- A Pure Component in React is a component that only re-renders when its props or state change. It helps optimize performance by reducing unnecessary re-renders.
+
+> In functional components, the equivalent is using React.memo.
+
+### 1.What Are Pure Components?
+
+- Class Components: Extend React.PureComponent instead of React.Component.
+
+```jsx
+class MyComponent extends React.PureComponent { ... }
+```
+
+Functional Components: Use React.memo to memoize renders.
+
+```jsx
+const MyComponent = React.memo((props) => { ... });
+```
+
+> Key Feature: Automatically implements shouldComponentUpdate with a shallow comparison of props and state. Re-renders only if props/state change.
+
+### 2. How Pure Components Work
+
+> Shallow Comparison Primitives: Compares values (e.g., 5 === 5, 'text' === 'text').
+> Objects/Arrays: Compares references, not contents.
+
+```jsx
+const obj1 = { id: 1 };
+const obj2 = { id: 1 };
+obj1 === obj2; // ❌ false (different references)
+```
+
+Class Component Example
+
+```jsx
+class UserList extends React.PureComponent {
+  render() {
+    return this.props.users.map((user) => <User key={user.id} data={user} />);
+  }
+}
+```
+
+#### 4. Pure Components in Functional Components
+
+- Use React.memo to memoize functional components. For fine-grained control, pass a custom comparison function:
+
+```jsx
+const UserList = React.memo(
+  ({ users }) => users.map((user) => <User key={user.id} data={user} />),
+  (prevProps, nextProps) => {
+    // Return `true` to skip re-render (if users array hasn't changed)
+    return prevProps.users === nextProps.users;
+  }
+);
+```
+
 
 ## ERROR BOUNDARY
 
@@ -1026,7 +1153,7 @@ Pitfall 3: Forgetting Event Propagation:
 ```jsx
 const Parent = () => (
   <div onClick={handleParentClick}>
-    <Child onClick={handleChildClick} /> 
+    <Child onClick={handleChildClick} />
   </div>
 );
 
