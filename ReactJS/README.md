@@ -1747,3 +1747,97 @@ const Timer = () => {
   }, []);
 };
 ```
+
+## PORTALS in React
+
+- Portals in React allow you to render a component’s children outside the current DOM hierarchy, typically into a different DOM node. This is critical for UI patterns like modals, tooltips, or overlays that need to break out of parent CSS constraints (e.g., overflow: hidden or z-index issues).
+
+- Portals let you render JSX into a DOM node that exists outside the parent component’s DOM tree.
+
+> Syntax:
+
+```jsx
+import ReactDOM from "react-dom";
+
+function Modal({ children }) {
+  return ReactDOM.createPortal(
+    children,
+    document.getElementById("portal-root") // Target DOM node
+  );
+}
+```
+
+Key Insight: Even though the DOM node is outside the parent, the component retains React context and event bubbling (events propagate through the React tree, not the DOM tree).
+
+### Why Use Portals?
+
+Avoid CSS Conflicts:
+
+- Parent styles like overflow: hidden or z-index won’t affect the portal’s content.
+- Semantic HTML:
+  Render modals/dialogs at the root level for accessibility.
+- Clean Component Structure:
+  Keep JSX for overlays logically inside their components while rendering elsewhere.
+
+### Basic Usage
+
+Step 1: Add a Portal Target
+Add an empty DOM node (e.g., in public/index.html):
+
+```html
+<div id="portal-root"></div>
+<!-- Outside the React root -->
+```
+
+Step 2: Create a Portal Component
+
+```jsx
+import ReactDOM from "react-dom";
+
+const Modal = ({ children, isOpen }) => {
+  if (!isOpen) return null;
+
+  return ReactDOM.createPortal(
+    <div className="modal">{children}</div>,
+    document.getElementById("portal-root")
+  );
+};
+
+// Usage
+const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
+      <Modal isOpen={isModalOpen}>
+        <h2>Modal Title</h2>
+        <p>Modal content</p>
+        <button onClick={() => setIsModalOpen(false)}>Close</button>
+      </Modal>
+    </div>
+  );
+};
+```
+
+### Advanced Usage
+
+a. Dynamic Portal Target
+Create a DOM node programmatically instead of relying on a static element:
+
+```jsx
+const DynamicPortal = ({ children }) => {
+  const [portalNode, setPortalNode] = useState(null);
+
+  useEffect(() => {
+    const node = document.createElement("div");
+    document.body.appendChild(node);
+    setPortalNode(node);
+    return () => document.body.removeChild(node); // Cleanup
+  }, []);
+
+  if (!portalNode) return null;
+
+  return ReactDOM.createPortal(children, portalNode);
+};
+```
