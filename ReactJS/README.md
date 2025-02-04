@@ -1841,3 +1841,50 @@ const DynamicPortal = ({ children }) => {
   return ReactDOM.createPortal(children, portalNode);
 };
 ```
+
+## RENDER PROPS
+
+- Render props are properties that are rendered, and they can be used to share code between components. This pattern is useful for making components reusable, as it allows us to pass different data to the render prop each time. 
+
+- Render Props is a pattern in React where a function is passed as a prop to a component, allowing for dynamic rendering.
+
+🔹 Why use it?
+✅ Promotes code reusability and separation of concerns.
+✅ Helps in sharing logic between components without using Higher-Order Components (HOC).
+✅ Useful for scenarios like data fetching, authentication, and animations.
+
+useCase :
+
+- Data Fetching (e.g., Fetch API in Multiple Components)
+
+```jsx
+const FetchData = ({ url, render }) => {
+  const [data, setData] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, [url]);
+
+  return render({ data, loading });
+};
+
+function UsersList() {
+  return (
+    <FetchData
+      url="https://jsonplaceholder.typicode.com/users"
+      render={({ data, loading }) =>
+        loading ? <p>Loading...</p> : <ul>{data.map((user) => <li key={user.id}>{user.name}</li>)}</ul>
+      }
+    />
+  );
+}
+
+export default UsersList;
+```
+
