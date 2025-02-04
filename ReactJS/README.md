@@ -712,7 +712,6 @@ const UserList = React.memo(
 );
 ```
 
-
 ## ERROR BOUNDARY
 
 An Error Boundary is a React component that catches JavaScript errors in its child component tree during rendering, lifecycle methods, and in constructors of child components. It allows developers to gracefully handle errors by displaying a fallback UI instead of crashing the entire application
@@ -1405,5 +1404,346 @@ export const UseStatDummy = () => {
       <button onClick={() => setCount(count + 1)}>Increment</button>}
     </div>
   );
+};
+```
+
+## useMemo Hook
+
+- useMemo is a React Hook that memoizes the result of an expensive calculation so that it doesn’t recompute on every render unless its dependencies change.
+
+- ✅ Use it to optimize performance when dealing with complex computations or preventing unnecessary re-renders of components.
+
+1. Syntax & Basic Example
+
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b])
+
+```jsx
+import { useMemo } from "react";
+
+function expensiveCalculation() {
+  // expensive calculation
+}
+
+const memoizedValue = useMemo(() => expensiveCalculation(), []);
+```
+
+> Real life Use Cases for useMemo in React:
+
+- The useMemo hook is particularly useful when there are expensive calculations, such as sorting or filtering, that need to be performed. It can also be used to prevent unnecessary re-renders by caching the result of a calculation.
+
+```jsx
+import { useMemo, useState } from "react";
+function App() {
+  const [filter, setFilter] = useState("");
+  const items = useMemo(() => {
+    // expensive calculation
+  }, [filter]);
+  return (
+    <div>
+      <input
+        type="text"
+        value={filter}
+        onChange={(event) => setFilter(event.target.value)}
+      />
+      <ItemList items={items} />
+    </div>
+  );
+}
+```
+
+1️⃣ Optimizing Expensive Computations:-
+
+Problem: A slow function runs on every render, causing lag.
+✅ Solution: Use useMemo to cache the result.
+
+```jsx
+import React, { useState, useMemo } from "react";
+
+function ExpensiveComponent() {
+  const [count, setCount] = useState(0);
+  const [number, setNumber] = useState(10);
+
+  const expensiveCalculation = (num) => {
+    console.log("Calculating...");
+    let result = 0;
+    for (let i = 0; i < 1000000000; i++) {
+      result += num;
+    }
+    return result;
+  };
+
+  const memoizedResult = useMemo(() => expensiveCalculation(number), [number]);
+
+  return (
+    <div>
+      <h2>Expensive Result: {memoizedResult}</h2>
+      <button onClick={() => setCount(count + 1)}>
+        Increment Count: {count}
+      </button>
+      <button onClick={() => setNumber(number + 1)}>
+        Change Number: {number}
+      </button>
+    </div>
+  );
+}
+
+export default ExpensiveComponent;
+```
+
+2️⃣ Preventing Unnecessary Re-renders in Child Components:-
+
+💡 Problem: Child components re-render unnecessarily when a parent component updates.
+✅ Solution: Use useMemo to keep the same reference for unchanged props.
+
+```jsx
+import React, { useState, useMemo } from "react";
+
+const List = ({ items }) => {
+  console.log("List re-rendered");
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+};
+
+const MemoizedList = React.memo(List); // Prevents unnecessary re-renders
+
+function ParentComponent() {
+  const [count, setCount] = useState(0);
+
+  const items = useMemo(() => ["Apple", "Banana", "Orange"], []);
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Increment: {count}</button>
+      <MemoizedList items={items} />
+    </div>
+  );
+}
+
+export default ParentComponent;
+```
+
+3️⃣ Avoiding Object Reference Changes
+
+💡 Problem: Even if an object looks the same, it creates a new reference on every render, causing React.memo or PureComponent to fail.
+✅ Solution: Wrap objects in useMemo.
+
+```jsx
+import React, { useState, useMemo } from "react";
+
+const ChildComponent = React.memo(({ config }) => {
+  console.log("Child component re-rendered");
+  return <p>Theme: {config.theme}</p>;
+});
+
+function Parent() {
+  const [count, setCount] = useState(0);
+
+  const config = useMemo(() => ({ theme: "dark" }), []); // Memoized object
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Increment: {count}</button>
+      <ChildComponent config={config} />
+    </div>
+  );
+}
+
+export default Parent;
+```
+
+4.Common Pitfalls
+
+❌ Overusing useMemo
+
+Using useMemo everywhere can harm performance due to caching overhead.
+
+```jsx
+const value = useMemo(() => 5 * 5, []);
+```
+
+Fix: Just use const value = 25; directly.
+
+❌ Using useMemo Instead of useCallback:
+If you’re memoizing a function, use useCallback instead of useMemo.
+
+> Bad const handleClick = useMemo(() => () => console.log("Clicked"), []);
+
+✅ Fix:
+
+```jsx
+const handleClick = useCallback(() => console.log("Clicked"), []);
+```
+
+## REFS in React
+
+- Refs are objects that hold mutable values (like DOM elements) and persist across re-renders. They bypass React’s state-driven updates, allowing direct interaction with the DOM.
+
+- They can be created using the useRef hook from React, which returns a ref object with a current property. The current property of a ref object stores the persisted value of the ref, and it can be used to access the underlying DOM element.
+
+Key Use Cases:
+
+- Managing focus, text selection, or media playback.
+- Integrating with third-party DOM libraries (e.g., D3.js, jQuery plugins).
+- Measuring DOM elements (e.g., width, scroll position).
+- Triggering imperative animation
+
+### Creating a Ref
+
+a. Functional Component:
+
+```jsx
+import { useRef } from "react";
+
+const TextInput = () => {
+  const inputRef = useRef(null);
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={focusInput}>Focus Input</button>
+    </>
+  );
+};
+```
+
+b. createRef (Class Components):
+
+```jsx
+class TextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+  }
+
+  focusInput = () => {
+    this.inputRef.current.focus();
+  };
+
+  render() {
+    return (
+      <>
+        <input ref={this.inputRef} />
+        <button onClick={this.focusInput}>Focus Input</button>
+      </>
+    );
+  }
+}
+```
+
+### Advanced Ref Patterns
+
+#### 1. Forwarding Refs
+
+- Pass refs from parent to child components using React.forwardRef:
+
+```jsx
+const CustomInput = React.forwardRef((props, ref) => (
+  <input ref={ref} {...props} />
+));
+
+// Parent component
+const Parent = () => {
+  const inputRef = useRef(null);
+  return <CustomInput ref={inputRef} />;
+};
+```
+
+#### Refs for Functional Components
+
+Use useImperativeHandle to expose specific methods to parent components:
+
+```jsx
+const FancyInput = React.forwardRef((props, ref) => {
+  const inputRef = useRef();
+
+  useImperativeHandle(ref, () => ({
+    focus: () => inputRef.current.focus(),
+    reset: () => (inputRef.current.value = ""),
+  }));
+
+  return <input ref={inputRef} />;
+});
+
+// Parent usage:
+const parentRef = useRef();
+<FancyInput ref={parentRef} />;
+parentRef.current.reset(); // Call child's method
+```
+
+#### c. Callback Refs
+
+Handle refs with a callback function (useful for dynamic ref assignments):
+
+```jsx
+const DynamicRefs = () => {
+  const [inputs, setInputs] = useState([]);
+  const refs = useRef([]);
+
+  return (
+    <>
+      {inputs.map((_, index) => (
+        <input key={index} ref={(el) => (refs.current[index] = el)} />
+      ))}
+    </>
+  );
+};
+```
+
+### Real World Examples
+
+#### a. Auto-Focus on Mount
+
+```jsx
+const AutoFocusInput = () => {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  return <input ref={inputRef} />;
+};
+```
+
+#### b. Measuring DOM Elements
+
+```jsx
+const MeasureElement = () => {
+  const divRef = useRef();
+
+  useEffect(() => {
+    const { width, height } = divRef.current.getBoundingClientRect();
+    console.log(`Width: ${width}, Height: ${height}`);
+  }, []);
+
+  return <div ref={divRef}>Measure me</div>;
+};
+```
+
+### 5. Best Practices
+
+> Avoid Overusing Refs: Prefer React’s declarative model (state/props) for most use cases.
+> Mutable Values: Use useRef to store values that don’t trigger re-renders (e.g., timers, previous state).
+
+```jsx
+const Timer = () => {
+  const intervalRef = useRef();
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      console.log("Tick");
+    }, 1000);
+
+    return () => clearInterval(intervalRef.current);
+  }, []);
 };
 ```
