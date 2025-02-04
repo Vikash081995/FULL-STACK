@@ -1036,7 +1036,6 @@ const handleChildClick = (e) => {
 };
 ```
 
-
 ## HIGH ORDER COMPONENT
 
 -Higher Order Components (HOCs) are functions that take a component and return a new component with additional functionality. They are a way of reusing the component's logic.
