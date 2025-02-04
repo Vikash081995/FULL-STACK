@@ -244,6 +244,225 @@ export default State;
 
 ### Core-Concepts
 
+#### a. useState Hook (Functional Components)
+
+```jsx
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount((c) => c + 1)}>Increment</button>
+      <p>Count: {count}</p>
+    </div>
+  );
+};
+```
+
+Key Insights:
+
+- Functional Updates: Use setCount(c => c + 1) for updates based on previous state (avoids stale closures).
+- Lazy Initialization: For expensive initial state, pass a function: useState(() => computeInitialState()).
+
+#### b. this.state (Class Components)
+
+```jsx
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+  render() {
+    return (
+      <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+        Count: {this.state.count}
+      </button>
+    );
+  }
+}
+```
+
+Key Insights:
+
+- Always use this.setState() to merge state updates (never mutate this.state directly).
+
+#### c. State Batching
+
+- React batches state updates for performance. In React 18+, automatic batching works across all event handlers, promises, etc.
+
+```jsx
+const handleClick = () => {
+  setCount(1);
+  setName("Alice"); // Only 1 re-render, not 2!
+};
+```
+
+#### Advanced State Patterns
+
+##### a.Lifting state up
+
+- Share state between sibling components by moving it to their closest common parent.
+
+```jsx
+// Parent
+const Parent = () => {
+  const [sharedState, setSharedState] = useState(null);
+  return (
+    <>
+      <ChildA state={sharedState} setState={setSharedState} />
+      <ChildB state={sharedState} />
+    </>
+  );
+```
+
+##### b. Immutability
+
+- Always treat state as immutable. For objects/arrays:
+
+```jsx
+// ❌ Bad (direct mutation)
+state.user.name = "Alice";
+
+// ✅ Good (new object)
+setUser({ ...user, name: "Alice" });
+```
+
+## SET STATE
+
+- The setState method in React is used to update the state of a component, which triggers a re-render of the component with the new state.
+
+- The setState method is a crucial part of React's state management system, allowing components to update their state and re-render with the new state. When the setState method is called, it merges the new state with the current state, rather than replacing it entirely. This ensures that the component's state is always up-to-date and consistent.
+
+- The setState method is asynchronous, meaning it may not immediately update the component's state. Instead, it schedules the state update to be processed in the next tick of the event loop. This asynchronous behavior allows React to batch multiple state updates together, improving performance.
+
+### Initializing State
+
+- The state of a React component can be initialized using the constructor or a property initializer. For example:
+
+```jsx
+class MyComponent extends React.Component {
+  state = {
+    year: 2016,
+    name: "Nader Dabit",
+    colors: ["blue"],
+  };
+  // ...
+}
+```
+
+### Updating State
+
+- The setState method can be used to update the state of a component. For example:
+
+```jsx
+this.setState({
+  year: 2017,
+  name: "John Doe",
+});
+```
+
+### 2. Functional Updates (Avoiding Stale State)
+
+- When the new state depends on the previous state, use the functional form of setState to avoid race conditions
+
+```jsx
+increment = () => {
+  this.setState((prevState) => ({
+    count: prevState.count + 1
+  }
+
+```
+
+Why?
+If multiple setState calls happen in rapid succession (e.g., in async code), using the functional form ensures you’re working with the latest state.
+
+### Using Callbacks with setState
+
+- The setState method can also take a callback function as a second argument, which is executed after the state has been updated and the component has been re-rendered. For example:
+
+```jsx
+this.setState(
+  {
+    year: 2017,
+    name: "John Doe",
+  },
+  () => {
+    console.log("State updated and component re-rendered");
+  }
+);
+```
+
+### Alternatives to setState
+
+- The useState Hook is a functional alternative to the setState method, which returns a value that persists across re-renders and a function to update it. For example
+
+```jsx
+const [state, setState] = useState({
+  year: 2016,
+  name: "Nader Dabit",
+});
+```
+
+### useState Hook in Functional Components
+
+- Functional components use useState, which behaves similarly but has key differences:
+
+```jsx
+import { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount((prev) => prev + 1); // Functional update
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+};
+```
+
+### Key Differences from setState
+
+- No Automatic Merging: useState replaces the state entirely (unlike class components).
+
+```jsx
+const [user, setUser] = useState({ name: "Alice", age: 30 });
+
+// ❌ Bad: Replaces the entire state (age is lost)
+setUser({ name: "Bob" });
+
+// ✅ Good: Merge manually
+setUser((prev) => ({ ...prev, name: "Bob" }));
+```
+
+- No Callback: Use useEffect instead:
+
+```jsx
+useEffect(() => {
+  console.log("Count updated:", count);
+}, [count]);
+```
+
+### ❌ Updating state incorrectly in loops
+
+```jsx
+for (let i = 0; i < 5; i++) {
+  setCount(count + 1); // ❌ Doesn't work correctly
+}
+```
+
+### ✅ Solution
+
+```jsx
+for (let i = 0; i < 5; i++) {
+  setCount((prevCount) => prevCount + 1); // ✅ Correct
+}
+```
+
 ## LIFECYCLE METHODS
 
 In React, lifecycle methods are special methods in class components that allow you to run code at particular times during a component’s life cycle. The lifecycle consists of three phases:
