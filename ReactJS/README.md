@@ -1,4 +1,4 @@
-# React JS
+# REACT JS
 
 ## JSX
 
@@ -1358,7 +1358,7 @@ export const UseStatDummy = () => {
 };
 ```
 
-## useMemo Hook
+## USEMEMO 
 
 - useMemo is a React Hook that memoizes the result of an expensive calculation so that it doesn’t recompute on every render unless its dependencies change.
 
