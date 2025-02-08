@@ -48,3 +48,27 @@ console.log(multiply(5)); // Output: 5
 const sumAll =(...numbers)=>numbers.reduce((acc,num)=>acc+num,0)
 console.log(sumAll(1,2,3,4,5)); // Output: 15
 //==================================================================
+//Destructuring
+
+const formatPerson =({name,age})=>`Name:${name},Age:${age}`;
+console.log(formatPerson({name:"Alice",age:30})); // Output: "Name: Alice, Age: 30"
+
+//==================================================================
+// Lexical This 
+function RegularFunc(){
+    this.value = 1;
+    setTimeout(function(){
+        console.log(this.value) //Output: undefined
+    },1000)
+}
+
+function ArrowFunc(){
+    this.value = 1;
+    setTimeout(()=>{
+        console.log(this.value) //Output: 1
+    },1000)
+}
+
+new RegularFunc();
+new ArrowFunc();
+//==================================================================
