@@ -745,7 +745,7 @@ class ErrorBoundary extends Component {
     };
   }
 
-  static getDerivedStaeFromError(error) {
+  static getDerivedStateFromError(error) {
     return { hasError: true, message: error };
   }
 
