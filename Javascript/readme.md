@@ -26,7 +26,7 @@ console.log(number2, number3);
 
 ### Types of variables
 
-> Arrays and Objects
+Arrays and Objects
 
 ```js
 var myArray = []; //Empty array
@@ -48,9 +48,7 @@ var myobject = {
   isMale: true,
 };
 console.log(myobject.name);
-```
 
-```js
 var myInt = 12; //32-bit number
 var myLong = 9838672372736;
 var myFloat = 3.14; //32 bit floating number
@@ -72,11 +70,12 @@ var mynull = null;
 - 1.Creation Stage
 - 2.Initialization Stage
 - 3.Assignment Stage
-  **Stage1:DECLARATION**
 
-  ```js
-  var username;
-  ```
+**Stage1:DECLARATION**
+
+```js
+var username;
+```
 
 **Stage2:INITIALIZATION**
 
