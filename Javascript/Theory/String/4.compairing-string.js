@@ -11,7 +11,7 @@ console.log(a.localeCompare(b)); //-1
 // so it should be written like this if ever used 
 function strCmp(a,b){
     if(a===b){
-        return 0;
+        return 0;   
     }
     if(a>b){
         return 1;
