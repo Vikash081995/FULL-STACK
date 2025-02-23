@@ -34,3 +34,45 @@ del users[0]
 print(users) #['JP', 'Alex', 'Sara', 'Elsa', 'Mike', 'Tom', 'Henry']
 users.sort()
 print(users) #['Alex', 'Elsa', 'Henry', 'JP', 'Mike', 'Sara', 'Tom']
+
+
+nums = [4,42,78,1,5]
+nums.reverse()
+print(nums) #[5, 1, 78, 42, 4]
+
+nums.sort(reverse=True);
+print(nums) #[78, 42, 5, 4, 1]
+
+print(sorted(nums)) #[1, 4, 5, 42, 78]
+
+numsCopy=nums.copy()
+mynums = list(nums)
+mycopy = nums[:]
+
+print(numsCopy) #[78, 42, 5, 4, 1]
+print(mynums) #[78, 42, 5, 4, 1]
+mycopy.sort()
+print(mycopy) #[1, 4, 5, 42, 78]
+print(nums) #[78, 42, 5, 4, 1]
+
+mylist = list([1,"Neil",True])
+print(mylist) #[1, 'Neil', True]
+
+#Tuples
+myTuple =tuple(('Dave','John','Sara'))
+anotherTuple =(1,4,2,8)
+print(type(myTuple)) #<class 'tuple'>)
+print(type(anotherTuple)) #<class 'tuple'>)
+
+newList = list(myTuple)
+print(newList) #['Dave', 'John', 'Sara']
+newList.append('Elsa')
+newtuple = tuple(newList)
+print(newtuple) #('Dave', 'John', 'Sara', 'Elsa')
+
+(one,two,*hey) = anotherTuple
+print(one) #1
+print(two) #4
+print(hey) #[2, 8]
+
+print(anotherTuple.count(2)) #1
