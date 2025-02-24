@@ -2,7 +2,8 @@
 
 - Currying is a functional programming technique where a function that takes multiple arguments is transformed into a sequence of functions, each taking a single argument.
 
-- Currying is a process of evaluating function arguments one by one, at the end of each evaluation producing a new function with one argument less. It is a technique that allows us to partially apply a function without having to worry about the way in which we implement our functions. For example, a function that takes two arguments can be transformed into a function that takes one argument and returns another function that takes one argument
+- Currying is a process of evaluating function arguments one by one, at the end of each evaluation producing a new function with one argument less. It is a technique that allows us to partially apply a function without having to worry about the way in which we implement our functions.
+For example, a function that takes two arguments can be transformed into a function that takes one argument and returns another function that takes one argument
 
 ## Implementing Currying
 
@@ -81,13 +82,11 @@ Why is this useful?
 
 🔍 Internally, JavaScript stores the arguments in a closure until all required arguments are received.
 
-
 ### 3️⃣ Examples
 
 1️⃣ Basic Currying
 
 ```js
-
 const multiply = (a) => (b) => (c) => a * b * c;
 
 console.log(multiply(2)(3)(4)); // Output: 24

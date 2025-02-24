@@ -4,16 +4,16 @@
 
 // Write your solution here
 
-const calc =prop=>operator=>value=>obj=>{
-    const operations ={
-        '>':(a,b)=>a>b,
-        '<':(a,b)=>a>b,
-        '=':(a,b)=>a==b,
-        'length':(a,b)=>a.length === b
-    }
-    return operations[operator](obj[prop],value)
-}
+const calc = (prop) => (operator) => (value) => (obj) => {
+  const operations = {
+    ">": (a, b) => a > b,
+    "<": (a, b) => a > b,
+    "=": (a, b) => a == b,
+    length: (a, b) => a.length === b,
+  };
+  return operations[operator](obj[prop], value);
+};
 
 const person = { name: "John", age: 25 };
-console.log(validateProperty('age')('>')(18)(person)); // true
-console.log(validateProperty('name')('length')(4)(person)); // true
+console.log(validateProperty("age")(">")(18)(person)); // true
+console.log(validateProperty("name")("length")(4)(person)); // true
