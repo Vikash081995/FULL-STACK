@@ -8,7 +8,7 @@
 
 x=10
 y=3.5
-z="123"
 print(str(x)); #"10"
-print(int(y));  #3
+z="123"
+print(int(y));  #3f
 print(int(z));  #123

@@ -1,8 +1,6 @@
-meaning =42
+meaning = 42
 
 if meaning > 10:
-    print('Right on!')
+    print("Right on!")
 else:
-    print('Not today')
-    
-    
+    print("Not today")
