@@ -7,8 +7,14 @@ console.log(sum(1, 2));
 const getLength = (str) => str.length;
 
 console.log(getLength("Hello")); //'output: 5'
+//====================================================================
+const isEven = (x) => {
+  return x % 2 === 0;
+};
 
-// ====================================================================
+console.log(isEven(46));//true 
+console.log(isEven(45)) //true 
+//====================================================================
 // NO PARAMETERS
 
 const greet = () => "HELLO WORLD";
