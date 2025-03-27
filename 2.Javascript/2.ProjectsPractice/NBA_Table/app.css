@@ -5,3 +5,9 @@
 .loss {
   background-color: rgba(255, 0, 0, 0.3);
 }
+
+.box{
+  width:"40px";
+  height:"40px";
+  border:"1px solid black";
+}

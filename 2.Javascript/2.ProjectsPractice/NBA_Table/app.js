@@ -84,9 +84,6 @@ const warriorsGames = [{
 }
 ]
 
-// **************************************************
-// STEP 1 - UGLY, UN-REFACTORED CODE! (but it works!)
-// **************************************************
 const makeChart=(games)=>{
   const ulParent = document.createElement('ul');
   for (let game of games) {
@@ -113,3 +110,56 @@ const makeChart=(games)=>{
 
 const chart1 = makeChart(warriorsGames)
 document.body.prepend(ulParent)
+
+// **************************************************
+const colors=['red','orange','yellow','green','blue','purple']
+
+
+const h1 = document.querySelector('h1')
+function changeColor(event){
+  h1.style.color = this.style.backgroundColor;
+}
+
+const container = document.querySelector('#boxes')
+for(let color of colors){
+  const box = document.createElement('div')
+  box.style.backgroundColor = color;
+  box.classList.add('box')
+  container.appendChild(box);
+  box.addEventListener('click',changeColor)
+}
+document.body.addEventListener('keypress',function(e){
+  console.log(e)
+  h1.innerText = e.key
+  console.log(e.key)
+})
+
+// **************************************************
+const input = document.querySelector('#username')
+
+input.addEventListener('keydown',function(e){
+  console.log('KEY DOWN')
+})
+
+input.addEventListener('keyup',function(e){
+  console.log('KEY UP')
+})
+
+input.addEventListener('keypress',function(e){
+  console.log('KEY PRESS')
+})
+
+const addItemInput = document.querySelector('#addItem');
+const itemsUL = document.querySelector('#items')
+
+addItemInput.addEventListener('keypress',function(e){
+  console.log(e)
+  if(e.key === 'Enter'){
+    if(!this.value) return;
+    const newItemText = this.value;
+    const newItem = document.createElement('li');
+    newItem.innerText = newItemText;
+    itemsUL.appendChild(newItem);
+    this.value = '';
+  }
+})
