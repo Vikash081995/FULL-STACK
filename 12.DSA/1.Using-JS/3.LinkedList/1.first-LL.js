@@ -44,11 +44,22 @@ class LinkedList {
     this.length++;
     return this;
   }
-  insert(index, value)
+  printList(){
+    const array =[];
+    let currentNode= this.head;
+    while(currentNode!==null){
+      array.push(currentNode.value)
+      currentNode = currentNode.next
+    }
+  }
+  insert(index, value){
+    
+  }
 }
+const myLL = new LinkedList(10);
 myLL.append(5);
 myLL.append(6);
-const myLL = new LinkedList(10);
-console.log(myLL)
 myLL.prepend(1);
+myLL.printList();
+// myLL.insert(2, 99);
 console.log(myLL)

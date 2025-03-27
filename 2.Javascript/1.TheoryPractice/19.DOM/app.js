@@ -69,7 +69,7 @@ console.log(firstLI.parentElement.parentElement.parentElement);
 const firstul = document.querySelector("ul");
 console.log(firstul.children);
 console.log(firstul.children[0]);
-const firstLi=  document.querySelector("li");
+const firstLi = document.querySelector("li");
 console.log(firstLi.previousElementSibling);
 console.log(firstLi.nextElementSibling);
 console.log(firstLi.nextElementSibling.nextElementSibling);
@@ -78,13 +78,13 @@ console.log(firstLi.nextElementSibling.nextElementSibling);
 //===========================================
 const allLis = document.querySelectorAll("li");
 
-for(let i=0;i<allLis.length;i++){
+for (let i = 0; i < allLis.length; i++) {
     console.log(allLis[i].innerText)
 }
 
-for(let li of allLis){
-    li.innerHTML = "WE ARE <b>THE CHAMPIONS</b>"
-}
+// for(let li of allLis){
+//     li.innerHTML = "WE ARE <b>THE CHAMPIONS</b>"
+// }
 //===========================================
 //changing styles
 //===========================================
@@ -95,9 +95,9 @@ p.style.fontSize = "20px";
 p.style.backgroundColor = "yellow";
 //===========================================
 const allLIS = document.querySelectorAll("li");
-const colors= ["red","orange","yellow","green","blue","purple"];
+const colors = ["red", "orange", "yellow", "green", "blue", "purple"];
 
-allLIS.forEach((li,i)=>{
+allLIS.forEach((li, i) => {
     const color = colors[i];
     li.style.color = color;
 }
@@ -111,4 +111,42 @@ console.log(compStyles.color);
 console.log(compStyles.fontSize);
 //===========================================
 //MANIPULATING CLASSES
+//===========================================
+
+const todo = document.querySelector('#todos .todo')
+todo.style.color='gray';
+todo.style.opacity='0.5';
+
+
+//===========================================
+//Creating Elements
+//===========================================
+const newH2 = document.createElement('h2');
+newH2.innerText = "I AM A NEW H2";
+newH2.classList.add('special');
+const section = document.querySelector('section');
+section.appendChild(newH2);
+
+
+const newImg =document.createElement('img');
+newImg.src = "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+newImg.style.width = '200px';
+document.body.appendChild(newImg);
+
+const newLink = document.createElement('a');
+newLink.innerText = 'Mr. Google';
+newLink.href = 'https://www.google.com';
+document.body.appendChild(newLink);
+
+//===========================================
+const parentUl = document.querySelector('ul');
+const newLi = document.createElement('li');
+newLi.innerText = "I AM A NEW LI";
+parentUl.appendChild(newLi);    
+
+const firLi = document.querySelector('li.todo');
+parentUl.insertBefore(newLi,firLi)
+
+const secUl = document.querySelector('section ul');
+ul.querySelector('li.todo').remove();
 //===========================================
