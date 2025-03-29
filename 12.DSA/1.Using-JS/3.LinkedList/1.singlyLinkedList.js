@@ -33,6 +33,8 @@ class LinkedList {
     this.length = 1;
   }
 
+
+  //append or push
   append(value) {
     const newNode = new Node(value);
     this.tail.next = newNode;
@@ -41,6 +43,8 @@ class LinkedList {
     return this;
   }
 
+
+  //prepend or unshift
   prepend(value) {
     const newNode = new Node(value);
     newNode.next = this.head;
@@ -48,6 +52,7 @@ class LinkedList {
     this.length++;
     return this;
   }
+
 
   printList() {
     const array = [];
@@ -60,6 +65,8 @@ class LinkedList {
     return array; // Return the array if needed
   }
 
+
+  //insert  
   insert(index, value) {
     if (index >= this.length) {
       return this.append(value);
