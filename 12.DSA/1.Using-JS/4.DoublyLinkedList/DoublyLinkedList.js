@@ -55,6 +55,44 @@ class DoublyLinkedList {
         this.length++;
         return this
     }
+    shift() {
+        if (this.length === 0) return undefined
+        let temp = this.head;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.next
+            this.head.prev = null;
+            temp.next = null;
+        }
+        this.length--;
+        return temp;
+    }
+    get(index) {
+        if (index < 0 || index >= this.length) return undefined
+        let temp = this.head;
+        if (index < this.length / 2) {
+            for (let i = 0; i < index; i++) {
+                temp = temp.next
+            }
+        } else {
+            temp = this.tail;
+            for (let i = this.length - 1; i > index; i--) {
+                temp = temp.dev
+            }
+        }
+        return temp
+    }
+
+    set(index, value) {
+        let temp = this.get(index);
+        if (temp) {
+            temp.value = value;
+            return true
+        }
+        return false
+    }
 }
 
 let myDLL = new DoublyLinkedList(7);
@@ -64,4 +102,10 @@ console.log(myDLL);
 myDLL.pop();
 console.log(myDLL);
 myDLL.unshift(10);
+console.log(myDLL);
+myDLL.shift();
+console.log(myDLL);
+myDLL.get(0);
+console.log(myDLL);
+myDLL.set(0, 100);
 console.log(myDLL);
