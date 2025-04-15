@@ -3,7 +3,7 @@ const http = require("http");
 
 //=======CUSTOM EVENT EMITTER =========
 class Sales extends EventEmitter {
-  constructor() {   
+  constructor() {
     super();
   }
 }
@@ -22,19 +22,18 @@ myEmitter.on("newSale", (stock) => {
 
 myEmitter.emit("newSale", 9);
 
-
 //==========================================
 
 const server = http.createServer();
 
 server.on("request", (req, res) => {
   console.log("request received");
-}); 
-
-server.on('close',(req,res)=>{
-    console.log('server is closed')
 });
 
-server.listen(8000,()=>{
-    console.log("server is listening on port 8000")
-})
+server.on("close", (req, res) => {
+  console.log("server is closed");
+});
+
+server.listen(8000, () => {
+  console.log("server is listening on port 8000");
+});

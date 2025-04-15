@@ -1,4 +1,4 @@
-const PizzaShop = require("./pizza-shop")
+const PizzaShop = require("./pizza-shop");
 
 const pizzaShop = new PizzaShop();
 
