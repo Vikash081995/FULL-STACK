@@ -14,5 +14,3 @@ const fiboGen = fibo();
 for (let i = 0; i < 5; i++) {
   console.log(fiboGen.next().value);
 }
-
-

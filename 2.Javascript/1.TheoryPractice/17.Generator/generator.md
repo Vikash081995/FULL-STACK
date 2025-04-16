@@ -5,11 +5,10 @@ A generator is a special function in JavaScript that allows pausing and resuming
 A generator is a special kind of function that can be paused and resumed, allowing us to generate a sequence of values over time rather than computing them all at once. Think of it like a book where you can place a bookmark - you can stop reading, do something else, and then come back to exactly where you left off.
 
 ```js
-function* generator(){
-    yield 1;
-    yield 2;
-    yield 3;
-
+function* generator() {
+  yield 1;
+  yield 2;
+  yield 3;
 }
 
 const gen = generator();

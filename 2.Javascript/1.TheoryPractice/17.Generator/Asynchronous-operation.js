@@ -4,10 +4,10 @@ function* fetchData() {
   return data;
 }
 
-
 const generator = fetchData();
 
-generator.next().value
-  .then((response) => generator.next(response))
+generator
+  .next()
+  .value.then((response) => generator.next(response))
   .then((data) => console.log(data.value))
-  .catch((error) => console.log(error))
+  .catch((error) => console.log(error));

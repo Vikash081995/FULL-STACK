@@ -1,0 +1,11 @@
+3 ?? 0 //3
+0 ?? 1 //0
+null ?? 1 //1
+undefined ?? 1 //1
+false ?? 1 //false
+true ?? 1 //true
+
+let score;
+
+score ??=0 //score=0
+score ||=1
