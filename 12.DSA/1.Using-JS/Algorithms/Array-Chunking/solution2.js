@@ -9,3 +9,4 @@ function chunked(array, size) {
   return chunked;
 }
 console.log(chunked([1, 2, 3, 4, 5, 6, 7, 8], 3));
+  
