@@ -1,7 +1,6 @@
 // Online Javascript Editor for free
 // Write, Edit and Run your Javascript code using JS Online Compiler
 
-
 // let myLL={
 //     head:{
 //         value:10,
@@ -15,7 +14,6 @@
 //     }
 // }
 
-
 class Node {
   constructor(value) {
     this.value = value;
@@ -27,12 +25,11 @@ class LinkedList {
   constructor(value) {
     this.head = {
       value,
-      next: null
+      next: null,
     };
     this.tail = this.head;
     this.length = 1;
   }
-
 
   //append or push
   append(value) {
@@ -43,7 +40,6 @@ class LinkedList {
     return this;
   }
 
-
   //prepend or unshift
   prepend(value) {
     const newNode = new Node(value);
@@ -52,7 +48,6 @@ class LinkedList {
     this.length++;
     return this;
   }
-
 
   printList() {
     const array = [];
@@ -65,8 +60,7 @@ class LinkedList {
     return array; // Return the array if needed
   }
 
-
-  //insert  
+  //insert
   insert(index, value) {
     if (index >= this.length) {
       return this.append(value);
@@ -95,25 +89,25 @@ class LinkedList {
     const unwantedNode = leader.next;
     leader.next = unwantedNode.next;
     this.length--;
-    return this.printList()
+    return this.printList();
   }
 
   reverse() {
     if (!this.head.next) {
-      return this.head
+      return this.head;
     }
     let first = this.head;
     this.tail = this.head;
     let second = first.next;
     while (second) {
       const temp = second.next;
-      second.next = first
+      second.next = first;
       first = second;
       second = temp;
     }
     this.head.next = null;
     this.head = first;
-    return this
+    return this;
   }
 }
 
@@ -125,5 +119,5 @@ myLL.printList();
 myLL.insert(2, 99);
 console.log(myLL);
 myLL.printList();
-myLL.remove(3)
-myLL.printList()  
+myLL.remove(3);
+myLL.printList();
