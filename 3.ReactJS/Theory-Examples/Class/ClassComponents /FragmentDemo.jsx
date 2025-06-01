@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 
 function FragmentDemo() {
   return (
     <React.Fragment>
       <h1>Fragment Demo</h1>
-      <p>This dscribes the fragment demo component</p>
+      <p>This describes the fragment demo component</p>
     </React.Fragment>
   );
 }

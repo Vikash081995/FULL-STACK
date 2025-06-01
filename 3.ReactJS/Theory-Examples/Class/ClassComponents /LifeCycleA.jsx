@@ -37,7 +37,9 @@ class LifeCycleA extends Component {
     return (
       <>
         <div>LifeCycleA</div>
-        <button onClick={() => this.setState({ name: "Codevolution" })}>Click</button>
+        <button onClick={() => this.setState({ name: "Codevolution" })}>
+          Click
+        </button>
         <LifeCycleB />
       </>
     );

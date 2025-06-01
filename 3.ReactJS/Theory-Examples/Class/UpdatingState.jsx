@@ -9,7 +9,7 @@ class Counter extends React.Component {
   increment = () => {
     this.setState({ count: this.state.count + 1 });
   };
-  render() {        
+  render() {
     return (
       <div>
         <p>You clicked {this.state.count} times</p>

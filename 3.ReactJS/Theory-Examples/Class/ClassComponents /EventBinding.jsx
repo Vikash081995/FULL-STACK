@@ -7,16 +7,16 @@ class EventBinding extends Component {
       message: "Hello",
     };
   }
-  handleClick=()=> {
+  handleClick = () => {
     this.setState({
       message: "Goodbye",
     });
-  }
+  };
   render() {
     return (
       <div>
         <h1>{this.state.message}</h1>
-        <button onClick={()=>this.handleClick()}>Click</button>
+        <button onClick={() => this.handleClick()}>Click</button>
       </div>
     );
   }

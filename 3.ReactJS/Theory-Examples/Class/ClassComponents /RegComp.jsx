@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import  { Component } from "react";
+import { Component } from "react";
 
 class RegComp extends Component {
   render() {
