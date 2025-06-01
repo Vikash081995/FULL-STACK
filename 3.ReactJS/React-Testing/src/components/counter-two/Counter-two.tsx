@@ -1,9 +1,9 @@
 import React from "react";
 
-const Countertwo = (props:{
-    count: number;
-    handleIncrement?: () => void;
-    handleDecrement?: () => void;
+const Countertwo = (props: {
+  count: number;
+  handleIncrement?: () => void;
+  handleDecrement?: () => void;
 }) => {
   return (
     <div>
