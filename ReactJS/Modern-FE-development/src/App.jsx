@@ -1,23 +1,23 @@
-import Button from "./component/Button";
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import Product from "./Products/Products";
+import UserList from "./demos/UserList/UserList";
 
 const App = () => {
-  const [price, setPrice] = useState(100);
-  // const handleAddToCart = () => {
-  //   console.log("Item added to cart");
-  // };
+  const [users, setUsers] = useState([
+    { id: 1, name: "John Doe", email: "john@example.com", isActive: true },
+    { id: 2, name: "Jane Smith", email: "jane@example.com", isActive: false },
+  ]);
 
-  // const handleCheckout = () => {
-  //   console.log("Proceeding to checkout");
-  // };
+  const toggleUserActivity = (id) => {
+    const updatedActivity = users.map((user) => {
+      user.id === id ? { ...user, isActive: !user.isActive } : user;
+    });
+  };
 
-
-  const increasePrice = () => setPrice(price+10)
   return (
     <div>
-      <Product price={price} />
-     <Button onClick={increasePrice}>Increase Price</Button>
+      <h1>User List</h1>
+      <UserList users={users} toggleUserActivity={toggleUserActivity} />
     </div>
   );
 };
