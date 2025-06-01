@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-const ChildTwo = ({name}) => {
+const ChildTwo = ({ name }) => {
   console.log("Child Render");
 
   return <h1>Child Component-{name}</h1>;
