@@ -18,6 +18,7 @@ const App = () => {
     <div>
       <h1>User List</h1>
       <UserList users={users} toggleUserActivity={toggleUserActivity} />
+      <UserDashboard user={{ name: "John Doe", tasks: [] }} />
     </div>
   );
 };
