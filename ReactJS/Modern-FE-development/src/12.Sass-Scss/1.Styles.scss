@@ -1,0 +1,29 @@
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+.button {
+  background-color: $primary-color;
+  color: white;
+  font-family: $font-stack;
+  padding: 10px 20px;
+  border: none;
+}
+
+//mixins
+
+@mixin button-styles($bg-color) {
+  background-color: $bg-color;
+  color: white;
+  font-family: $font-stack;
+  padding: 10px 20px;
+  border: none;
+}
+
+.primary-button {
+  @include button-styles($primary-color);
+}
+
+.secondary-button {
+  @include button-styles($secondary-color);
+}
