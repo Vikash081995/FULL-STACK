@@ -5,3 +5,9 @@ export const metadata: Metadata = {
     absolute: "Second Blog Post",
   },
 };
+
+const SecondBlogPost = () => {
+  return <div>SecondBlogPost</div>;
+};
+
+export default SecondBlogPost;

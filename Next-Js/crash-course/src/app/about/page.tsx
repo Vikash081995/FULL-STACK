@@ -1,6 +1,6 @@
 export const metadata ={
-    title:"About codevolution",
-    description:"This is the about page of codevolution",
+    title:"About code-volution",
+    description:"This is the about page of code-volution",
 }
 
 export default function About(){
