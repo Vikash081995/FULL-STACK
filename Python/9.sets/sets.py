@@ -22,8 +22,8 @@ print(nums)
 #{False, 1, 2, 3, 4, 8}
 
 # add elements from one set to another 
-morenums ={10,11,12}
-nums.update(morenums)
+more_nums ={10,11,12}
+nums.update(more_nums)
 print(nums)
 #{False, 1, 2, 3, 4, 8, 10, 11, 12}
 
@@ -34,6 +34,6 @@ print(nums)
 one = {1,2,3}
 two = {5,6,7}
 
-mynewset = one.union(two)
-print(mynewset)
+my_new_set = one.union(two)
+print(my_new_set)
 #{1, 2, 3, 5, 6, 7}
