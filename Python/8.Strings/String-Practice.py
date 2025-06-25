@@ -10,7 +10,6 @@ print(letters[-1]) #z
 print(letters[-3]) #x
 
 # ==============================================
-
 fruits = "apple,banana,orange"
 print(fruits)
 firstFruit = fruits[0]
