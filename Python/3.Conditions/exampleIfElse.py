@@ -54,3 +54,24 @@ elif marks >= 60:
 else:
     print("Fail")
 # ============================================================
+
+
+loc = "Bangalore"
+
+if loc == "Bangalore":
+    print("You are in Bangalore")
+elif loc == "Delhi":
+    print("You are in Delhi")
+else: 
+    print("You are in some other city")
+    
+    #=============================================================
+    
+name ="Sammy"
+
+if name == "Sammy":
+    print("Hello Sammy ! ")
+elif name == "Vikash":
+    print("Hello Vikash ! ")
+else:
+    print("Hello Stranger ! ")
