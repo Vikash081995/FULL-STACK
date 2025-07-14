@@ -80,3 +80,32 @@ print(two)  # 4
 print(hey)  # [2, 8]
 
 print(anotherTuple.count(2))  # 1
+
+#==============================================
+#copying lists
+my_foods = ['pizza','falafel','carrot cake']
+friend_foods = my_foods[:]
+
+print("My favorite foods are:")
+print(my_foods)
+print("my friends fav foods are:")
+print(friend_foods)
+
+my_foods.append('cannoli')
+friend_foods.append('ice cream')
+
+print("My favorite foods are:")
+print(my_foods)
+print("my friends fav foods are:")
+print(friend_foods)
+
+#==============================================
+my_new_foods =['pizza','falafel','carrot cake']
+friends_new_foods = my_new_foods
+my_new_foods.append('cannoli')
+friends_new_foods.append('ice cream')
+
+print("My favorite foods are:")
+print(my_new_foods)
+print("my friends fav foods are:")
+print(friends_new_foods)
