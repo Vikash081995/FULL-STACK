@@ -1,0 +1,1 @@
+result = f(a, b, c, d=5, e="foo")
