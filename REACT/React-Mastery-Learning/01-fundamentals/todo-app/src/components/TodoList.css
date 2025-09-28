@@ -1,0 +1,53 @@
+/* 📚 CONCEPT: List Component Styling */
+/* Styles for the todo list container and empty state */
+
+.todo-list {
+    margin-top: 20px;
+}
+
+.todo-list h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.todo-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.empty-state p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* 🎯 KEY LEARNING POINTS:
+   1. List Styling - Removing default list styles
+   2. Flexbox - Vertical layout for todo items
+   3. Empty State - Centered, friendly messaging
+   4. Typography - Consistent font sizes and weights
+   5. Spacing - Consistent gaps and padding
+*/

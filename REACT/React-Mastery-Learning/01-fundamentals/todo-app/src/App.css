@@ -1,0 +1,47 @@
+/* 📚 CONCEPT: Component-Specific Styles */
+/* These styles are scoped to the App component */
+
+.app {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    min-height: 500px;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.app-header h1 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.app-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.app-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 🎯 KEY LEARNING POINTS:
+   1. CSS Modules - Scoped styling
+   2. Modern CSS - Flexbox, gradients, shadows
+   3. Responsive Design - max-width and width
+   4. Visual Hierarchy - Typography and spacing
+*/

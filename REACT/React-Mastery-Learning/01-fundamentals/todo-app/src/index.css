@@ -1,0 +1,30 @@
+/* 📚 CONCEPT: Global Styles */
+/* These styles apply to the entire application */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 🎯 KEY LEARNING POINTS:
+   1. CSS Reset - Removes default browser styles
+   2. Modern CSS - Flexbox for centering
+   3. Responsive Design - min-height and padding
+   4. Visual Appeal - Gradient background
+*/
