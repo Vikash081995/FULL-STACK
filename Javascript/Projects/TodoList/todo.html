@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Todo List</title>
+  </head>
+  <body>
+    <h2>My Todo List</h2>
+    <input type="text" id="taskInput" placeholder="New task..." />
+    <button onclick="addTask()">Add</button>
+    <ul id="taskList"></ul>
+    <script>
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      function renderTasks() {
+        console.log("Rendering tasks:", tasks);
+        document.getElementById("taskList").innerHTML = "";
+        tasks.forEach((task, i) => {
+          let li = document.createElement("li");
+          li.textContent = task;
+          li.onClick = () => removeTasks(i);
+          li.style.color = "black";
+          document.getElementById("taskList").appendChild(li);
+        });
+      }
+
+      function addTask() {
+        let input = document.getElementById("taskInput");
+        tasks.push(input.value);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        input.value = "";
+        renderTasks();
+      }
+
+      function removeTasks(index) {
+        tasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        renderTasks();
+      }
+      renderTasks();
+    </script>
+  </body>
+</html>
