@@ -1,6 +1,0 @@
-print(hex(12))
-print(hex(512))
-print(bin(12))
-print(pow(2,3))
-print(abs(-12))
-print(round(3.4))
