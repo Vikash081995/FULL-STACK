@@ -1,6 +1,6 @@
 const express = require("express");
-const { loggerMiddleware } = require("./middlewares/logger");
-const bookRouter = require("./routes/book.routes");
+const { loggerMiddleware } = require("./Bookstore/middlewares/logger");
+const bookRouter = require("./Bookstore/routes/book.routes");
 const app = express();
 
 //middleware
