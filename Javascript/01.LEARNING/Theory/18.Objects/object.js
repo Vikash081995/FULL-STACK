@@ -7,19 +7,24 @@ const person = {
 };
 
 console.log(person); // { name: 'John', age: 20 }
+
 //=========================================================
 //accessing object properties
 //=========================================================
 console.log(person.name); // John
 console.log(person["age"]); // 20
+
 //=========================================================
 //updating object properties
 //=========================================================
 person.name = "Peter";
 person["age"] = 24;
 console.log(person); // { name: 'Peter', age: 24 }
+
 //=========================================================
 //adding new properties to object
+//=========================================================
+
 person.gender = "male";
 person["job"] = "teacher";
 console.log(person); // { name: 'Peter', age: 24, gender: 'male', job: 'teacher' }
