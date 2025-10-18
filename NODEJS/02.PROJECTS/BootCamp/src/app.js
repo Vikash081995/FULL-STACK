@@ -1,7 +1,7 @@
 import express from "express";
 const app = express();
 import cors from "cors";
-
+import authRouter from "./routes/auth.routes.js";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,7 +18,8 @@ app.use(express.static("public"));
 //import the routes 
 import healthCheckRouter from "./routes/healthchecks.routes.js"
 
-app.use("/api/v1/healthCheck",healthCheckRouter)
+app.use("/api/v1/healthCheck",healthCheckRouter);
+app.use("/api/v1/auth", authRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
