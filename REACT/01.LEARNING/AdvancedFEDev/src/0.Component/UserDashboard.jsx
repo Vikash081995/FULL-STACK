@@ -20,15 +20,15 @@ function UserDashboard({ user }) {
       {tasks.length > 0 ? (
         <ul>
           {tasks.map((task, index) => (
-            <li key={index}>
-              {task}
+            <>
+              <li key={index}> {task} </li>
               <button
                 onClick={() => removeTask(index)}
                 style={{ marginLeft: "10px" }}
               >
                 Remove
               </button>
-            </li>
+            </>
           ))}
         </ul>
       ) : (
