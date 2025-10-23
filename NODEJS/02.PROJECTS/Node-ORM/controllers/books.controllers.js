@@ -1,14 +1,13 @@
 const booksTable = require("../models/book.model");
 const db = require("../db");
+const { eq } = require("drizzle-orm");
 
 // Controller functions for books
 // Assumes a `books` table with columns: id (uuid), title, description, authorsId
 
 exports.getAllBooks = async (req, res) => {
   try {
-    const result = await db.query(
-      'SELECT id, title, description, "authorsId" FROM books'
-    );
+    const result = await db.select().from(booksTable);
     return res.json(result.rows);
   } catch (err) {
     console.error("getAllBooks error", err);
@@ -19,12 +18,13 @@ exports.getAllBooks = async (req, res) => {
 exports.getBookById = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await db.query(
-      'SELECT id, title, description, "authorsId" FROM books WHERE id = $1',
-      [id]
-    );
-    if (result.rows.length === 0)
-      return res.status(404).json({ error: "Book not found" });
+    const [book] = await db
+      .select()
+      .from(booksTable)
+      .where((table) => eq(table.id, id))
+      .limit(1);
+
+    if (!book) return res.status(404).json({ error: "Book not found" });
     return res.json(result.rows[0]);
   } catch (err) {
     console.error("getBookById error", err);
@@ -33,16 +33,25 @@ exports.getBookById = async (req, res) => {
 };
 
 exports.createBook = async (req, res) => {
-  const { title, description, authorsId } = req.body;
-  if (!title || !authorsId)
+  const { title, description, authorId } = req.body;
+
+  if (!title || !authorId)
     return res.status(400).json({ error: "title and authorsId are required" });
 
   try {
-    const result = await db.query(
-      'INSERT INTO books(title, description, "authorsId") VALUES ($1, $2, $3) RETURNING id, title, description, "authorsId"',
-      [title, description || null, authorsId]
-    );
-    return res.status(201).json(result.rows[0]);
+    const result = await db
+      .insert(booksTable)
+      .values({
+        title,
+        description,
+        authorsId: authorId,
+      })
+      .returning({
+        id: booksTable.id,
+      });
+    return res
+      .status(201)
+      .json({ message: "Book created", bookId: result[0].id });
   } catch (err) {
     console.error("createBook error", err);
     return res.status(500).json({ error: "Internal server error" });
@@ -51,17 +60,31 @@ exports.createBook = async (req, res) => {
 
 exports.updateBook = async (req, res) => {
   const { id } = req.params;
-  const { title, description, authorsId } = req.body;
+  const { title, description, authorId } = req.body;
+
+  if (!title && !description && !authorId)
+    return res
+      .status(400)
+      .json({ error: "At least one field to update is required" });
+
   try {
-    const existing = await db.query("SELECT id FROM books WHERE id = $1", [id]);
-    if (existing.rows.length === 0)
+    const updateData = {};
+    if (title) updateData.title = title;
+    if (description) updateData.description = description;
+    if (authorId) updateData.authorsId = authorId;
+
+    const result = await db
+      .update(booksTable)
+      .set(updateData)
+      .where((table) => eq(table.id, id))
+      .returning({
+        id: booksTable.id,
+      });
+
+    if (result.length === 0)
       return res.status(404).json({ error: "Book not found" });
 
-    const result = await db.query(
-      'UPDATE books SET title = COALESCE($1, title), description = COALESCE($2, description), "authorsId" = COALESCE($3, "authorsId") WHERE id = $4 RETURNING id, title, description, "authorsId"',
-      [title, description, authorsId, id]
-    );
-    return res.json(result.rows[0]);
+    return res.json({ message: "Book updated", bookId: result[0].id });
   } catch (err) {
     console.error("updateBook error", err);
     return res.status(500).json({ error: "Internal server error" });
@@ -70,16 +93,22 @@ exports.updateBook = async (req, res) => {
 
 exports.deleteBook = async (req, res) => {
   const { id } = req.params;
+
   try {
-    const result = await db.query(
-      "DELETE FROM books WHERE id = $1 RETURNING id",
-      [id]
-    );
-    if (result.rows.length === 0)
+    const result = await db
+      .delete(booksTable)
+      .where((table) => eq(table.id, id))
+      .returning({
+        id: booksTable.id,
+      });
+
+    if (result.length === 0)
       return res.status(404).json({ error: "Book not found" });
-    return res.status(204).send();
+
+    return res.json({ message: "Book deleted", bookId: result[0].id });
   } catch (err) {
     console.error("deleteBook error", err);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
