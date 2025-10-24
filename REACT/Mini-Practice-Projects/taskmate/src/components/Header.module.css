@@ -1,0 +1,51 @@
+/* Header.module.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0.5rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.logo span {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.themeSelector {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.themeSelector span {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.light {
+    background: #fff;
+}
+
+.dark {
+    background: #111827;
+}
+
+.system {
+    background: linear-gradient(135deg, #e6eef9, #f6e7ff);
+}

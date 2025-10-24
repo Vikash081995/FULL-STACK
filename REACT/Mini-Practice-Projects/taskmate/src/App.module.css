@@ -1,0 +1,16 @@
+/* App.module.css */
+.app {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.containerCard {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 6px 18px rgba(25, 30, 40, 0.06);
+}

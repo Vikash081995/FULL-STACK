@@ -1,0 +1,62 @@
+/* ShowTask.module.css */
+.showTask {
+    background: #fff;
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    box-shadow: 0 6px 18px rgba(25, 30, 40, 0.04);
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+}
+
+.count {
+    background: #eef2ff;
+    color: #3730a3;
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.clearAll {
+    background: transparent;
+    border: 1px solid #e5e7eb;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+li {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #f1f5f9;
+}
+
+.name {
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 0.8rem;
+}
+
+.time {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
